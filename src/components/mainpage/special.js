@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import background from "../../images/specialimg.jpeg";
+import { AnimationOnScroll } from "react-animation-on-scroll";
 
 export default function Special() {
   return (
@@ -17,12 +18,16 @@ export default function Special() {
           satisfying, now I know every Jazz bar in the south!
         </p>
         <ButtonsContainer>
-          <Button color={"#F00241"}>
-            Set up your <br /> <span> ARTIST PROFILE </span>
-          </Button>
-          <Button color={"#F88922"}>
-            Set up your <br /> <span> CONTRACTOR PROFILE </span>
-          </Button>
+          <AnimationOnScroll animateIn="animate__flipInX">
+            <Button color={"#F00241"}>
+              Set up your <br /> <span> ARTIST PROFILE </span>
+            </Button>
+          </AnimationOnScroll>
+          <AnimationOnScroll animateIn="animate__flipInX">
+            <Button color={"#F88922"}>
+              Set up your <br /> <span> CONTRACTOR PROFILE </span>
+            </Button>
+          </AnimationOnScroll>
         </ButtonsContainer>
       </ContentContainer>
     </SpecialContainer>
@@ -79,7 +84,7 @@ const SpecialImage = styled.img`
 const ButtonsContainer = styled.div`
   height: 15vh;
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
   align-items: center;
 `;
 
@@ -92,7 +97,12 @@ const Button = styled.button`
   font-size: 1.5vh;
   color: #fff;
   font-weight: 300;
-
+  text-shadow: 0px 0px 7px #000000;
+  transition: all 0.1s ease-in;
+  :hover {
+    cursor: pointer;
+    transform: scale(1.1);
+  }
   span {
     font-size: 1.8vh;
     font-weight: 700;

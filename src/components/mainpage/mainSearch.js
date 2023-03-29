@@ -1,5 +1,8 @@
 import { FaSearch } from "react-icons/fa";
 import styled from "styled-components";
+import Places from "../searches/locationSearch";
+import MusicalStyleSearch from "../searches/musicalStyleSearch";
+import TypeSearch from "../searches/typeSearch";
 
 export default function MainSearch() {
   return (
@@ -8,7 +11,7 @@ export default function MainSearch() {
         <InputsContainer>
           <InputContainer>
             <p>LOCATION</p>
-            <Input width={"9vw"}></Input>
+            <Places />
           </InputContainer>
           <InputContainer>
             <p>DATE</p>
@@ -16,11 +19,11 @@ export default function MainSearch() {
           </InputContainer>
           <InputContainer>
             <p>MUSICAL STYLE</p>
-            <Input width={"9vw"}></Input>
+            <MusicalStyleSearch />
           </InputContainer>
           <InputContainer>
             <p>TYPE</p>
-            <Input width={"5vw"}></Input>
+            <TypeSearch />
           </InputContainer>
           <SearchContainer>
             <SearchIcon size={"2vh"} />
@@ -69,6 +72,9 @@ const Input = styled.input`
 `;
 
 const SearchIcon = styled(FaSearch)`
-color: #000;
-filter: drop-shadow(0px 0px 3px #fff);
+  color: #000;
+  filter: drop-shadow(0px 0px 3px #fff);
+  :hover {
+    cursor: pointer;
+  }
 `;

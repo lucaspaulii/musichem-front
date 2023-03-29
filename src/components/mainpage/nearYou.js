@@ -1,5 +1,4 @@
 import useNearArtist from "@/hooks/useNearArtist";
-import artistService from "@/services/artistsServices";
 import { useEffect, useState } from "react";
 import styled from "styled-components";
 import ArtistCard from "./artistCard";
@@ -16,7 +15,7 @@ export default function NearYou() {
     <NearYouContainer>
       <h1>Near You</h1>
       <ArtistsContainer>
-        {nearArtists.length > 0 &&
+        {nearArtists?.length > 0 &&
           nearArtists.map((artist) => <ArtistCard artist={artist} />)}
       </ArtistsContainer>
       <h2>See More...</h2>
@@ -35,6 +34,10 @@ const NearYouContainer = styled.div`
     height: 1.5vh;
     margin-bottom: 1vh;
     font-weight: 700;
+    transition: scale 0.5s ease-in;
+    :hover {
+      cursor: pointer;
+    }
   }
   h2 {
     margin-top: 1vh;
@@ -42,6 +45,9 @@ const NearYouContainer = styled.div`
     height: 1.5vh;
     text-align: end;
     font-weight: 700;
+    :hover {
+      cursor: pointer;
+    }
   }
 `;
 

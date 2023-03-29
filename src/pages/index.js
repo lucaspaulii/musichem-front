@@ -12,18 +12,23 @@ const inter = Inter({ subsets: ["latin"] });
 
 export default function Home() {
   return (
-    <MainContainer>
-      <Cover />
-      <About />
-      <Special />
-      <Oportunity />
-      <Footer />
-    </MainContainer>
+    <>
+      <Head>
+        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAxuQ_SZyPpdHnxsQKvz6iU81Y8WPQFAys&libraries=places"></script>
+      </Head>
+      <MainContainer>
+        <Cover />
+        <About />
+        <Special />
+        <Oportunity />
+        <Footer />
+      </MainContainer>
+    </>
   );
 }
 
 const MainContainer = styled.div`
   display: flex;
   flex-direction: column;
-  font-family: 'Montserrat', sans-serif;
+  font-family: "Montserrat", sans-serif;
 `;

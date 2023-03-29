@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { AnimationOnScroll } from "react-animation-on-scroll";
 import styled from "styled-components";
 import background from "../../images/aboutimg.jpeg";
 
@@ -6,7 +7,9 @@ export default function About() {
   return (
     <AboutContainer>
       <ContentContainer>
-        <h2>WHAT IS MUSICHEMS?</h2>
+        <AnimationOnScroll animateIn="animate__fadeInLeft">
+          <h2>WHAT IS MUSICHEMS?</h2>
+        </AnimationOnScroll>
         <h3>
           We are a platform where you can find musicians, bands and DJs
           available in your area, check out their profile, ratings, pricing and
@@ -46,7 +49,7 @@ const ContentContainer = styled.div`
   );
 
   h2 {
-    max-width: 80%;
+    max-width: 100%;
     text-align: center;
     color: #30419f;
     font-size: 5vh;

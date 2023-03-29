@@ -1,12 +1,15 @@
 import styled from "styled-components";
 import background from "../../images/oportunityimg.jpeg";
+import { AnimationOnScroll } from "react-animation-on-scroll";
 
 export default function Oportunity() {
   return (
     <OportunityContainer imgUrl={background.src}>
       <OportunityTitleContainer>
         <h1>Sometimes they only need</h1>
-        <h2>one oportunity</h2>
+        <AnimationOnScroll animateIn="animate__bounceIn">
+          <h2>one oportunity</h2>
+        </AnimationOnScroll>
       </OportunityTitleContainer>
       <p>Charlotte Campbell, solo artist</p>
     </OportunityContainer>
@@ -24,8 +27,8 @@ const OportunityContainer = styled.div`
     position: absolute;
     font-size: 1.3vw;
     right: 25vw;
-    top:55vh;
-    
+    top: 55vh;
+
     font-weight: 600;
   }
 `;
@@ -41,9 +44,9 @@ const OportunityTitleContainer = styled.div`
   display: flex;
   flex-direction: column;
   h1 {
-    color: #F00241;
+    color: #f00241;
   }
   h2 {
-    color: #F88922;
+    color: #f88922;
   }
 `;

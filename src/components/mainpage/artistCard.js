@@ -12,14 +12,10 @@ export default function ArtistCard({ artist }) {
       </NameInfo>
       <OtherInfo>
         <h5>
-          {artist.type} / {artist.style.map(s => ` ${s} `)}
+          {artist.type} / {artist.style.map((s) => ` ${s} `)}
         </h5>
-        <h6>
-            Starting from ${artist.price[0].price}
-        </h6>
-        <h7>
-            {artist.location}
-        </h7>
+        <h6>Starting from ${artist.price[0].price}</h6>
+        <h7>{artist.location}</h7>
       </OtherInfo>
     </Card>
   );
@@ -28,10 +24,14 @@ export default function ArtistCard({ artist }) {
 const Card = styled.div`
   width: 12.5vw;
   height: 100%;
-  
   display: flex;
   flex-direction: column;
   align-items: center;
+  transition: all 0.1s ease-in;
+  :hover {
+    cursor: pointer;
+    background-color: rgba(260, 260, 260, 0.3);
+  }
 `;
 
 const ImgContainer = styled.div`
@@ -66,19 +66,18 @@ const NameInfo = styled.div`
 `;
 
 const OtherInfo = styled.div`
-width: 80%;
-font-size: 1.2vh;
+  width: 80%;
+  font-size: 1.2vh;
 
-h5 {
+  h5 {
     font-weight: 600;
     margin-bottom: 0.8vh;
-}
-h6 {
+  }
+  h6 {
     font-weight: 200;
     margin-bottom: 0.5vh;
-}
-h7 {
+  }
+  h7 {
     font-weight: 300;
-}
-
+  }
 `;
