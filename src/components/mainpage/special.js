@@ -1,12 +1,12 @@
 import styled from "styled-components";
-import background from "../../images/specialimg.jpeg";
 import { AnimationOnScroll } from "react-animation-on-scroll";
+import Router from "next/router";
 
 export default function Special() {
   return (
     <SpecialContainer>
       <ImageContainer>
-        <SpecialImage src={background.src} />
+        <SpecialImage src={"/images/specialimg.jpeg"} />
       </ImageContainer>
       <ContentContainer>
         <h1>What makes us special?</h1>
@@ -19,12 +19,12 @@ export default function Special() {
         </p>
         <ButtonsContainer>
           <AnimationOnScroll animateIn="animate__flipInX">
-            <Button color={"#F00241"}>
+            <Button color={"#F00241"} onClick={(e) => Router.push("/construction")}>
               Set up your <br /> <span> ARTIST PROFILE </span>
             </Button>
           </AnimationOnScroll>
           <AnimationOnScroll animateIn="animate__flipInX">
-            <Button color={"#F88922"}>
+            <Button color={"#F88922"} onClick={(e) => Router.push("/construction")}>
               Set up your <br /> <span> CONTRACTOR PROFILE </span>
             </Button>
           </AnimationOnScroll>

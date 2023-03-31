@@ -1,10 +1,9 @@
 import styled from "styled-components";
-import background from "../../images/oportunityimg.jpeg";
 import { AnimationOnScroll } from "react-animation-on-scroll";
 
 export default function Oportunity() {
   return (
-    <OportunityContainer imgUrl={background.src}>
+    <OportunityContainer>
       <OportunityTitleContainer>
         <h1>Sometimes they only need</h1>
         <AnimationOnScroll animateIn="animate__bounceIn">
@@ -19,7 +18,7 @@ export default function Oportunity() {
 const OportunityContainer = styled.div`
   width: 100%;
   height: 85vh;
-  background-image: url(${(props) => props.imgUrl});
+  background-image: url("/images/oportunityimg.jpeg");
   background-size: cover;
   position: relative;
 

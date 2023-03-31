@@ -1,8 +1,10 @@
 import styled from "styled-components";
+import css from "styled-jsx/css";
+import Router from "next/router";
 
-export default function ArtistCard({ artist }) {
+export default function ArtistCard({ artist, route }) {
   return (
-    <Card>
+    <Card route={route} onClick={(e) => Router.push("/construction")}>
       <ImgContainer>
         <img src={artist.coverImg} />
       </ImgContainer>
@@ -23,7 +25,7 @@ export default function ArtistCard({ artist }) {
 
 const Card = styled.div`
   width: 12.5vw;
-  height: 100%;
+  height: 30vh;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -32,6 +34,12 @@ const Card = styled.div`
     cursor: pointer;
     background-color: rgba(260, 260, 260, 0.3);
   }
+  ${(props) => props.route === "results" && css`
+  color: #ffffff;
+  transform: scale(1.3);
+  margin: 5vh;
+  flex-shrink: 0;
+  `}
 `;
 
 const ImgContainer = styled.div`

@@ -2,6 +2,7 @@ import useNearArtist from "@/hooks/useNearArtist";
 import { useEffect, useState } from "react";
 import styled from "styled-components";
 import ArtistCard from "./artistCard";
+import Router from "next/router";
 
 export default function NearYou() {
   const [nearArtists, setNearArtists] = useState([]);
@@ -13,12 +14,12 @@ export default function NearYou() {
 
   return (
     <NearYouContainer>
-      <h1>Near You</h1>
+      <h1 onClick={(e) => Router.push("/construction")}>Near You</h1>
       <ArtistsContainer>
         {nearArtists?.length > 0 &&
           nearArtists.map((artist) => <ArtistCard artist={artist} />)}
       </ArtistsContainer>
-      <h2>See More...</h2>
+      <h2 onClick={(e) => Router.push("/construction")}>See More...</h2>
     </NearYouContainer>
   );
 }

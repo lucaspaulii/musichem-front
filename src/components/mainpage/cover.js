@@ -1,12 +1,11 @@
 import styled from "styled-components";
-import background from "../../images/mainpagebg.jpeg";
-import logo from "../../images/logo.png";
+import background from "../../../public/images/mainpagebg.jpeg";
 import { BsPersonCircle } from "react-icons/bs";
 import MainSearch from "./mainSearch";
 import NearYou from "./nearYou";
 import { useState } from "react";
 import ProfileModal from "./ProfileModal";
-import { AnimationOnScroll } from "react-animation-on-scroll";
+import Router from "next/router";
 
 export default function Cover() {
   const [modal, setModal] = useState(false);
@@ -20,9 +19,9 @@ export default function Cover() {
     <CoverContainer imgUrl={background.src}>
       <ContentContainer>
         <LogoContainer>
-          <img src={logo.src} />
+          <img src={"/images/logo.png"} />
         </LogoContainer>
-        <MainSearch />
+        <MainSearch route={"main"}/>
         <NearYou />
       </ContentContainer>
       <Icon
@@ -31,7 +30,7 @@ export default function Cover() {
         color={modal ? "#000" : "#FFF"}
       />
       {modal && <ProfileModal modal={modal} setModal={setModal} />}
-      <ArtistLink>ARTIST? CLICK HERE</ArtistLink>
+      <ArtistLink onClick={(e) => Router.push("/construction")}>ARTIST? CLICK HERE</ArtistLink>
     </CoverContainer>
   );
 }
@@ -39,7 +38,7 @@ export default function Cover() {
 const CoverContainer = styled.div`
   height: 100vh;
   width: 100%;
-  background-image: url(${(props) => props.imgUrl});
+  background-image: url("/images/mainpagebg.jpeg");
   background-size: cover;
   color: #fff;
   position: relative;
@@ -74,6 +73,7 @@ const LogoContainer = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  margin-bottom: 5vh;
 
   img {
     height: 15vh;

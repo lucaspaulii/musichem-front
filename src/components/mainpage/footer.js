@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import background from "../../images/logo.png";
+import background from "../../../public/images/logo.png";
 
 export default function Footer() {
   return (

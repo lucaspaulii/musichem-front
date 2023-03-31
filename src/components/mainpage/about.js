@@ -1,7 +1,5 @@
-import Image from "next/image";
 import { AnimationOnScroll } from "react-animation-on-scroll";
 import styled from "styled-components";
-import background from "../../images/aboutimg.jpeg";
 
 export default function About() {
   return (
@@ -22,7 +20,7 @@ export default function About() {
         </p>
       </ContentContainer>
       <ImageContainer>
-        <AboutImage src={background.src} />
+        <AboutImage src={"/images/aboutimg.jpeg"} />
       </ImageContainer>
     </AboutContainer>
   );

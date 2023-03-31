@@ -11,20 +11,26 @@ import {
 } from "@reach/combobox";
 import { useLoadScript } from "@react-google-maps/api";
 import "@reach/combobox/styles.css";
-import { useState } from "react";
 import styled from "styled-components";
+import { useEffect } from "react";
+import axios from "axios";
 
-export default function Places() {
+export default function Places({ setLocation, searchParams, setAddress }) {
   const { isLoaded } = useLoadScript({
-    googleMapsApiKey: "AIzaSyAxuQ_SZyPpdHnxsQKvz6iU81Y8WPQFAys",
+    googleMapsApiKey: process.env.NEXT_PUBLIC_MAPS_KEY,
     libraries: ["places"],
   });
 
   if (!isLoaded) return <div>Loading...</div>;
-  return <PlacesAutocomplete />;
+  return (
+    <PlacesAutocomplete
+      setLocation={setLocation}
+      searchParams={searchParams}
+      setAddress={setAddress}
+    />
+  );
 }
-function PlacesAutocomplete() {
-  const [selected, setSelected] = useState(null);
+function PlacesAutocomplete({ setLocation, searchParams, setAddress }) {
   const {
     ready,
     value,
@@ -33,12 +39,19 @@ function PlacesAutocomplete() {
     clearSuggestions,
   } = usePlacesAutocomplete();
 
+  useEffect(() => {
+    if (searchParams) {
+      setValue(searchParams.address, false);
+    }
+  }, []);
+
   const handleSelect = async (address) => {
     setValue(address, false);
     clearSuggestions();
     const result = await getGeocode({ address });
     const { lat, lng } = getLatLng(result[0]);
-    setSelected({ lat, lng });
+    setLocation({ lat, lng });
+    setAddress(address);
   };
 
   return (
@@ -47,6 +60,7 @@ function PlacesAutocomplete() {
         value={value}
         onChange={(e) => setValue(e.target.value)}
         disabled={!ready}
+        required={true}
       />
       <ComboboxPopover>
         <ComboboxList>
@@ -66,5 +80,5 @@ const Input = styled(ComboboxInput)`
   padding-right: 1vh;
   border: 1px solid grey;
   height: 4vh;
-  width: 9vw;
+  width: 11vw;
 `;
