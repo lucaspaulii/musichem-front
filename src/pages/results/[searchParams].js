@@ -25,5 +25,4 @@ const ResultsContainer = styled.div`
   display: flex;
   flex-direction: column;
   font-family: "Montserrat", sans-serif;
-  background-color: red;
 `;

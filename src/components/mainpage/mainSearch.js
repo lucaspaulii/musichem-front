@@ -98,6 +98,9 @@ const InputContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  input:hover {
+    filter: brightness(90%)
+  }
   p {
     ${(props) =>
       props.route === "main"
@@ -120,7 +123,9 @@ const InputContainer = styled.div`
 const SearchIcon = styled(FaSearch)`
   color: #000;
   filter: drop-shadow(0px 0px 3px #fff);
+  transition: all 0.2s ease-in;
   :hover {
     cursor: pointer;
+    transform: scale(1.3);
   }
 `;

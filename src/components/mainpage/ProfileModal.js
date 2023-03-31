@@ -1,12 +1,13 @@
 import styled from "styled-components";
+import Router from "next/router";
 
 export default function ProfileModal({ modal, setModal }) {
   return (
     <Modal openModal={modal}>
       <h1>Hello, Visitor</h1>
       <FirstSection>
-        <a href="#">New here? Sign up</a>
-        <a href="#">Log in</a>
+        <a onClick={(e) => Router.push("/auth/sign/up")}>New here? Sign up</a>
+        <a onClick={(e) => Router.push("/auth/sign/in")}>Log in</a>
       </FirstSection>
       <SecondSection>
         <a href="#">Musichem yourself!</a>
@@ -47,6 +48,7 @@ const Modal = styled.div`
     transition: all 0.1s ease-in;
     :hover {
       transform: scale(1.1) translateX(1.2vh);
+      cursor: pointer;
     }
   }
 `;

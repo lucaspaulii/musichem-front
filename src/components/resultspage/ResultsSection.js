@@ -40,7 +40,6 @@ export default function ResultsSection({ searchParams }) {
 const ResultsContainer = styled.div`
   height: 100vh;
   width: 100%;
-  background-color: blue;
   background-image: url("/images/resultsbg.png");
   background-size: cover;
   display: flex;

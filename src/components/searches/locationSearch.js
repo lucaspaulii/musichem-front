@@ -13,9 +13,14 @@ import { useLoadScript } from "@react-google-maps/api";
 import "@reach/combobox/styles.css";
 import styled from "styled-components";
 import { useEffect } from "react";
-import axios from "axios";
+import css from "styled-jsx/css";
 
-export default function Places({ setLocation, searchParams, setAddress }) {
+export default function Places({
+  setLocation,
+  searchParams,
+  setAddress,
+  route,
+}) {
   const { isLoaded } = useLoadScript({
     googleMapsApiKey: process.env.NEXT_PUBLIC_MAPS_KEY,
     libraries: ["places"],
@@ -27,10 +32,11 @@ export default function Places({ setLocation, searchParams, setAddress }) {
       setLocation={setLocation}
       searchParams={searchParams}
       setAddress={setAddress}
+      route={route ? route : undefined}
     />
   );
 }
-function PlacesAutocomplete({ setLocation, searchParams, setAddress }) {
+function PlacesAutocomplete({ setLocation, searchParams, setAddress, route }) {
   const {
     ready,
     value,
@@ -61,6 +67,7 @@ function PlacesAutocomplete({ setLocation, searchParams, setAddress }) {
         onChange={(e) => setValue(e.target.value)}
         disabled={!ready}
         required={true}
+        route={route}
       />
       <ComboboxPopover>
         <ComboboxList>
@@ -79,6 +86,14 @@ const Input = styled(ComboboxInput)`
   padding-left: 1vh;
   padding-right: 1vh;
   border: 1px solid grey;
-  height: 4vh;
-  width: 11vw;
+  ${(props) =>
+    props.route === "auth"
+      ? css`
+          width: 24vw !important;
+          height: 3vh;
+        `
+      : css`
+          height: 4vh;
+          width: 11vw;
+        `}
 `;

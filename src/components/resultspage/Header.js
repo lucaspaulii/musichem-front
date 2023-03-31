@@ -29,5 +29,9 @@ const HeaderContainer = styled.div`
     height: 60%;
     left: 3%;
     top: 20%;
+    transition: all 0.1s ease-in;
+    :hover {
+      transform: scale(1.1);
+    }
   }
 `;
