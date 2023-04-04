@@ -58,7 +58,7 @@ export default function MusicalStyleSearch({ setStyle, searchParams }) {
         }}
         required={true}
       />
-      <Popover hidden={isFilled}>
+      <Popover hidden={isFilled} style={{ zIndex: 3000 }}>
         <ComboboxList hidden={isFilled}>
           {value.length >= 3 &&
             handleFilter(value).map((style, i) => {
@@ -79,6 +79,10 @@ const Input = styled(ComboboxInput)`
   border: 1px solid grey;
   height: 4vh;
   width: 7vw;
+
+  @media only screen and (max-width: 768px) {
+    width: 150px; 
+}
 `;
 
 const Popover = styled(ComboboxPopover)`

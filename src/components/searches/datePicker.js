@@ -29,4 +29,11 @@ const Picker = styled(DatePicker)`
   border: 1px solid grey;
   text-align: center;
   width: 4vw;
+
+  @media only screen and (max-width: 768px) {
+    width: 170px; 
+    text-align: left;
+    box-sizing: border-box;
+    padding-left: 10px;
+}
 `;

@@ -11,14 +11,11 @@ export default function Sign_in() {
   return (
     <AuthContainer>
       <LeftDiv>
-        <img
-          src="/images/logo2.png"
-          onClick={(e) => Router.push("/")}
-        />
-      </LeftDiv>
-      <RightDiv>
         {inup === "in" && <Login />}
         {inup === "up" && <SingUp />}
+      </LeftDiv>
+      <RightDiv>
+        <img src="/images/logo2.png" onClick={(e) => Router.push("/")} />
       </RightDiv>
     </AuthContainer>
   );
@@ -28,16 +25,33 @@ const AuthContainer = styled.div`
   width: 100%;
   height: 100vh;
   display: flex;
+  background-image: linear-gradient(
+    to right top,
+    #fdaf75,
+    #ffac98,
+    #fbb0b7,
+    #e8b9cc,
+    #d5c2d3,
+    #c7b8cd,
+    #b9aec6,
+    #a9a5c0,
+    #8f8ab8,
+    #7471b0,
+    #5658a8,
+    #30419f
+  );
 `;
 
-const LeftDiv = styled.div`
+const RightDiv = styled.div`
   width: 50%;
   height: 100%;
-  background-image: url("/images/authbg.png");
-  background-size: cover;
   display: flex;
   justify-content: center;
   align-items: center;
+
+  @media only screen and (max-width: 768px) {
+    display: none;
+}
 
   img {
     width: 50%;
@@ -49,12 +63,15 @@ const LeftDiv = styled.div`
   }
 `;
 
-const RightDiv = styled.div`
-  background-image: linear-gradient(to right top, #fdaf75, #ffac98, #fbb0b7, #e8b9cc, #d5c2d3, #c7b8cd, #b9aec6, #a9a5c0, #8f8ab8, #7471b0, #5658a8, #30419f);
+const LeftDiv = styled.div`
   display: flex;
   justify-content: center;
   font-family: "Montserrat", sans-serif;
   align-items: center;
   width: 50%;
   height: 100%;
+
+  @media only screen and (max-width: 768px) {
+    width: 100%; 
+}
 `;

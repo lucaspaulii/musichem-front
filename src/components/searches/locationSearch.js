@@ -69,7 +69,7 @@ function PlacesAutocomplete({ setLocation, searchParams, setAddress, route }) {
         required={true}
         route={route}
       />
-      <ComboboxPopover>
+      <ComboboxPopover style={{ zIndex: 3000 }}>
         <ComboboxList>
           {status === "OK" &&
             data.map(({ place_id, description }) => (
@@ -91,9 +91,17 @@ const Input = styled(ComboboxInput)`
       ? css`
           width: 24vw !important;
           height: 3vh;
+
+          @media only screen and (max-width: 768px) {
+            width: 180px !important;
+            height: 20px !important;
+          }
         `
       : css`
           height: 4vh;
           width: 11vw;
         `}
+  @media only screen and (max-width: 768px) {
+    width: 150px;
+  }
 `;

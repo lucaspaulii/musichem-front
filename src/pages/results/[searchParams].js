@@ -25,4 +25,9 @@ const ResultsContainer = styled.div`
   display: flex;
   flex-direction: column;
   font-family: "Montserrat", sans-serif;
+  position: relative;
+
+  @media only screen and (max-width: 768px) {
+    overflow-y: scroll;
+  }
 `;

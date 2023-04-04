@@ -1,9 +1,11 @@
 import styled from "styled-components";
 import { AnimationOnScroll } from "react-animation-on-scroll";
+import Image from "next/image";
 
 export default function Oportunity() {
   return (
     <OportunityContainer>
+      <Image src={"/images/oportunityimg.jpeg"} fill style={{objectFit:"cover", zIndex:"200"}}/>
       <OportunityTitleContainer>
         <h1>Sometimes they only need</h1>
         <AnimationOnScroll animateIn="animate__bounceIn">
@@ -18,18 +20,26 @@ export default function Oportunity() {
 const OportunityContainer = styled.div`
   width: 100%;
   height: 85vh;
-  background-image: url("/images/oportunityimg.jpeg");
   background-size: cover;
   position: relative;
-
   p {
     position: absolute;
     font-size: 1.3vw;
-    right: 25vw;
-    top: 55vh;
-
+    right: 5vw;
+    top: 5vh;
+    z-index: 400;
     font-weight: 600;
   }
+
+  @media only screen and (max-width: 768px) {
+    p {
+      font-size: 13px;
+      top: 95%;
+      color: #fff;
+      font-weight: 400;
+    }
+    
+}
 `;
 
 const OportunityTitleContainer = styled.div`
@@ -42,10 +52,15 @@ const OportunityTitleContainer = styled.div`
   width: 40%;
   display: flex;
   flex-direction: column;
+  z-index: 400;
   h1 {
     color: #f00241;
   }
   h2 {
     color: #f88922;
+  }
+  @media only screen and (max-width: 768px) {
+    font-size: 20px;
+    width: 80%;
   }
 `;

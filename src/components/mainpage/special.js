@@ -1,12 +1,17 @@
 import styled from "styled-components";
 import { AnimationOnScroll } from "react-animation-on-scroll";
 import Router from "next/router";
+import Image from "next/image";
 
 export default function Special() {
   return (
     <SpecialContainer>
       <ImageContainer>
-        <SpecialImage src={"/images/specialimg.jpeg"} />
+        <Image
+          src={"/images/specialimg.jpeg"}
+          fill
+          style={{ objectFit: "cover" }}
+        />
       </ImageContainer>
       <ContentContainer>
         <h1>What makes us special?</h1>
@@ -19,12 +24,18 @@ export default function Special() {
         </p>
         <ButtonsContainer>
           <AnimationOnScroll animateIn="animate__flipInX">
-            <Button color={"#F00241"} onClick={(e) => Router.push("/construction")}>
+            <Button
+              color={"#F00241"}
+              onClick={(e) => Router.push("/construction")}
+            >
               Set up your <br /> <span> ARTIST PROFILE </span>
             </Button>
           </AnimationOnScroll>
           <AnimationOnScroll animateIn="animate__flipInX">
-            <Button color={"#F88922"} onClick={(e) => Router.push("/construction")}>
+            <Button
+              color={"#F88922"}
+              onClick={(e) => Router.push("/construction")}
+            >
               Set up your <br /> <span> CONTRACTOR PROFILE </span>
             </Button>
           </AnimationOnScroll>
@@ -39,53 +50,95 @@ const SpecialContainer = styled.div`
   height: 70vh;
   background-color: #171717;
   display: flex;
+
+  @media only screen and (max-width: 768px) {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
 `;
 
 const ContentContainer = styled.div`
   height: 100%;
+  margin-left: 33%;
   width: 67%;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-
-  * {
-    width: 50%;
-  }
+  z-index: 300;
+  overflow: hidden;
 
   h1 {
     text-align: center;
-    font-size: 2.5vw;
+    font-size: 40px;
     font-weight: 800;
     color: #f00241;
-    margin-bottom: 1vh;
+    margin-bottom: 15px;
+    width: 50%;
   }
   h2 {
     color: #f88922;
-    margin-bottom: 3vh;
+    margin-bottom: 5vh;
+    width: 50%;
   }
   p {
     color: #fff;
     font-size: 2.5vh;
+    width: 50%;
+  }
+
+  @media only screen and (max-width: 768px) {
+    margin: 0;
+    width: 90%;
+    height: 90%;
+    background-color: rgba(0, 0, 0, 0.7);
+    p,
+    h1,
+    h2 {
+      width: 95%;
+      text-align: center;
+    }
+    h1 {
+      font-size: 3vh;
+      margin-bottom: 3px;
+    }
+    h2 {
+      font-size: 1.8vh;
+    }
+    p {
+      font-size: 2.0vh;
+      width: 80%;
+      text-align: left;
+      margin-bottom: 20px;
+    }
   }
 `;
 
 const ImageContainer = styled.div`
-  height: 100%;
+  position: absolute;
+  height: 90%;
   width: 33%;
   overflow: hidden;
-`;
 
-const SpecialImage = styled.img`
-  height: 100%;
-  width: auto;
+  @media only screen and (max-width: 768px) {
+    width: 100%;
+  }
 `;
 
 const ButtonsContainer = styled.div`
   height: 15vh;
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
   align-items: center;
+  width: 50%;
+  margin: 0 90px;
+
+  @media only screen and (max-width: 768px) {
+    margin: 10px 0;
+    width: 70%;
+  }
 `;
 
 const Button = styled.button`
@@ -107,4 +160,12 @@ const Button = styled.button`
     font-size: 1.8vh;
     font-weight: 700;
   }
+  @media only screen and (max-width: 768px) {
+    width: 28vw;
+    height: 18vw;
+
+    span {
+      font-size: 14px;
+      font-weight: 600;
+    }
 `;

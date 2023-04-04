@@ -1,11 +1,21 @@
 import styled from "styled-components";
 import MainSearch from "../mainpage/mainSearch";
 import Router from "next/router";
+import BackOne from "../authpage/backOne";
+import Image from "next/image";
 
 export default function Header({ searchParams }) {
   return (
     <HeaderContainer>
-      <img src={"/images/logo2.png"} onClick={(e) => Router.push("/")} />
+      <BackOne />
+      <ImageContainer>
+      <Image onClick={(e) => Router.push("/")}
+            src={"/images/logo2.png"}
+            fill
+            style={{ objectFit: "cover", zIndex: "100" }}
+            quality={100}
+          />
+      </ImageContainer>
       <MainSearch route={"results"} searchParams={searchParams} />
     </HeaderContainer>
   );
@@ -23,15 +33,29 @@ const HeaderContainer = styled.div`
   align-items: center;
   z-index: 500;
 
-  img {
-    cursor: pointer;
+  @media only screen and (max-width: 768px) {
+    position: relative;
+    height: 270px;
+    width: 100vw;
+  }
+`;
+
+const ImageContainer = styled.div`
+  cursor: pointer;
     position: absolute;
+    width: 138px;
     height: 60%;
-    left: 3%;
+    left: 4%;
     top: 20%;
     transition: all 0.1s ease-in;
     :hover {
       transform: scale(1.1);
     }
+
+    @media only screen and (max-width: 768px) {
+    top: 12px;
+    left: calc(50% - 42px);
+    height: 35px;
+    width: 100px;
   }
-`;
+`

@@ -30,7 +30,7 @@ export default function MainSearch({ route, searchParams }) {
   return (
     <>
       <form onSubmit={handleSubmit}>
-        <InputsContainer>
+        <InputsContainer route={route}>
           <InputContainer route={route}>
             <p>LOCATION</p>
             <Places
@@ -67,8 +67,8 @@ export default function MainSearch({ route, searchParams }) {
               searchParams={searchParams ? searchParams.type : undefined}
             />
           </InputContainer>
-          <SearchContainer type="submit">
-            <SearchIcon size={"2vh"} />
+          <SearchContainer type="submit" route={route}>
+            <SearchIcon size={"3vh"} route={route}/>
           </SearchContainer>
         </InputsContainer>
       </form>
@@ -81,17 +81,45 @@ const InputsContainer = styled.div`
   justify-content: center;
   align-items: center;
   height: 10vh;
+  @media only screen and (max-width: 768px) {
+    flex-direction: column;
+    ${(props) =>
+      props.route === "results"
+        ? css`
+            margin-top: 30px;
+            margin-bottom: 5px;
+          `
+        : css`
+            margin-top: 25px;
+            margin-bottom: 25px;
+          `}
+
+    padding-right: 60px;
+  }
 `;
 
 const SearchContainer = styled.button`
   background-color: transparent;
   border: none;
   margin-top: 2.5vh;
-  height: 4vh;
-  width: 4vh;
+  height: 5vh;
+  width: 5vh;
   display: flex;
   justify-content: center;
   align-items: center;
+  @media only screen and (max-width: 768px) {
+    position: absolute;
+    ${(props) =>
+      props.route === "results"
+        ? css`
+            right: 10%;
+            top: 100px;
+          `
+        : css`
+            right: 15%;
+            top: 21%;
+          `}
+  }
 `;
 
 const InputContainer = styled.div`
@@ -99,7 +127,7 @@ const InputContainer = styled.div`
   flex-direction: column;
   align-items: center;
   input:hover {
-    filter: brightness(90%)
+    filter: brightness(90%);
   }
   p {
     ${(props) =>
@@ -118,14 +146,37 @@ const InputContainer = styled.div`
     font-size: 1.5vh;
     font-weight: 700;
   }
+  @media only screen and (max-width: 768px) {
+    flex-direction: row;
+    justify-content: flex-start;
+    width: 100%;
+    margin-top: 5px;
+    p {
+      width: 100%;
+      text-align: right;
+      margin-right: 15px;
+    }
+  }
 `;
 
 const SearchIcon = styled(FaSearch)`
-  color: #000;
-  filter: drop-shadow(0px 0px 3px #fff);
+  color: #fff;
+  filter: drop-shadow(0px 0px 1px #fff);
   transition: all 0.2s ease-in;
   :hover {
     cursor: pointer;
     transform: scale(1.3);
+  }
+  @media only screen and (max-width: 768px) {
+    
+    ${(props) =>
+      props.route === "results"
+        ? css`
+            color: #000;
+            filter: drop-shadow(0px 0px 5px #ffffff);
+          `
+        : css`
+            filter: drop-shadow(0px 0px 5px #000);
+          `}
   }
 `;

@@ -1,10 +1,12 @@
 import styled from "styled-components";
 import Router from "next/router";
+import BackOne from "@/components/authpage/backOne";
 
 export default function Construction() {
   return (
     <ConstructionContainer>
       <ConstructionDiv>
+        <BackOne />
         <div>
           <img src="/images/logo2.png" onClick={(e) => Router.push("/")} />
         </div>
@@ -27,6 +29,8 @@ const ConstructionContainer = styled.div`
   width: 100%;
   height: 100vh;
   background-image: url("/images/constructionbg.png");
+  background-size: cover;
+  background-color: #000;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -39,12 +43,10 @@ const ConstructionDiv = styled.div`
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  //background-color: rgba(260, 260, 260, 0.3);
 
   h1 {
     font-size: 4vh;
     font-weight: 800;
-    //color: #30419f;
     color: #f00241;
     text-align: center;
     text-shadow: 0px 0px 10px #000000;
@@ -94,4 +96,14 @@ const ConstructionDiv = styled.div`
       cursor: pointer;
     }
   }
+
+  @media only screen and (max-width: 768px) {
+    h2 {
+      font-size: 14px;
+    }
+
+    img {
+      width: 55%;
+    }
+}
 `;

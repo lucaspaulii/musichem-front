@@ -6,6 +6,7 @@ import NearYou from "./nearYou";
 import { useState } from "react";
 import ProfileModal from "./ProfileModal";
 import Router from "next/router";
+import Image from "next/image";
 
 export default function Cover() {
   const [modal, setModal] = useState(false);
@@ -16,12 +17,23 @@ export default function Cover() {
   }
 
   return (
-    <CoverContainer imgUrl={background.src}>
+    <CoverContainer>
+      <Image
+        src={"/images/mainpagebg.jpeg"}
+        fill
+        style={{ objectFit: "cover", zIndex: "100" }}
+        quality={50}
+      />
       <ContentContainer>
         <LogoContainer>
-          <img src={"/images/logo.png"} />
+          <Image
+            src={"/images/logo.png"}
+            fill
+            style={{ objectFit: "cover", zIndex: "100" }}
+            quality={100}
+          />
         </LogoContainer>
-        <MainSearch route={"main"}/>
+        <MainSearch route={"main"} />
         <NearYou />
       </ContentContainer>
       <Icon
@@ -30,7 +42,9 @@ export default function Cover() {
         color={modal ? "#000" : "#FFF"}
       />
       {modal && <ProfileModal modal={modal} setModal={setModal} />}
-      <ArtistLink onClick={(e) => Router.push("/construction")}>ARTIST? CLICK HERE</ArtistLink>
+      <ArtistLink onClick={(e) => Router.push("/construction")}>
+        ARTIST? CLICK HERE
+      </ArtistLink>
     </CoverContainer>
   );
 }
@@ -38,7 +52,6 @@ export default function Cover() {
 const CoverContainer = styled.div`
   height: 100vh;
   width: 100%;
-  background-image: url("/images/mainpagebg.jpeg");
   background-size: cover;
   color: #fff;
   position: relative;
@@ -46,19 +59,24 @@ const CoverContainer = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  IconType {
-    color: red;
-  }
 `;
 
 const ContentContainer = styled.div`
   height: 75%;
   width: 70%;
+  z-index: 300;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  @media only screen and (max-width: 768px) {
+    height: 90%;
+  }
 `;
 
 const Icon = styled(BsPersonCircle)`
   position: absolute;
-  z-index: 200;
+  z-index: 1200;
   top: 5vh;
   left: 7vh;
   transition: all 0.1s ease-in;
@@ -66,19 +84,25 @@ const Icon = styled(BsPersonCircle)`
     cursor: pointer;
     transform: scale(1.1);
   }
+  @media only screen and (max-width: 768px) {
+    top: 17px;
+    left: 17px;
+  }
 `;
 
 const LogoContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
   margin-bottom: 5vh;
+  width: 8vw;
+  height: 7vw;
+  margin-bottom: 2vh;
+  position: relative;
 
-  img {
-    height: 15vh;
-    width: auto;
-    margin-bottom: 1vh;
+  @media only screen and (max-width: 768px) {
+    position: absolute;
+    top: 20px;
+    left: calc(50% - 50px);
+    width: 100px;
+    height: 80px;
   }
 `;
 
@@ -88,6 +112,7 @@ const ArtistLink = styled.a`
   left: 5vh;
   font-size: 2vh;
   font-weight: 700;
+  z-index: 400;
   transition: all 0.1s ease-in;
   :hover {
     cursor: pointer;

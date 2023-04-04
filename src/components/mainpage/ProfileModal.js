@@ -51,6 +51,21 @@ const Modal = styled.div`
       cursor: pointer;
     }
   }
+
+  @media only screen and (max-width: 768px) {
+    width: 250px;
+    height: 250px;
+    left: 3px;
+    top: 3px;
+    z-index: 1000;
+    background-color: rgba(230, 230, 230, 0.95);
+    h1 {
+      font-size: 15px;
+    }
+    a {
+      font-size: 15px;
+    }
+}
 `;
 
 const FirstSection = styled.div`

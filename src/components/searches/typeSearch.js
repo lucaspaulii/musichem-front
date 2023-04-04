@@ -38,7 +38,7 @@ export default function TypeSearch({ setType, searchParams }) {
         }}
         required={true}
       />
-      <ComboboxPopover hidden={isFilled}>
+      <ComboboxPopover hidden={isFilled} style={{ zIndex: 3000 }}>
         <ComboboxList hidden={isFilled}>
           {types.map((type, i) => {
             return <ComboboxOption key={i} value={type} />;
@@ -56,4 +56,8 @@ const Input = styled(ComboboxInput)`
   border: 1px solid grey;
   height: 4vh;
   width: 5vw;
+
+  @media only screen and (max-width: 768px) {
+    width: 150px; 
+}
 `;

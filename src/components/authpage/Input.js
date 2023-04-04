@@ -1,15 +1,24 @@
 import styled from "styled-components";
 import Places from "../searches/locationSearch";
+import Image from "next/image";
 
 export default function Input({ text, type }) {
   return (
     <InputContainer>
-      <h1>{text}</h1>
+      <p>{text}</p>
       {type === "location" ? (
         <Places route="auth" />
       ) : (
-        <InputStyled type={type} required/>
+        <InputStyled type={type} required />
       )}
+      <LogoContainer>
+        <Image
+          src={"/images/logo2.png"}
+          fill
+          style={{ objectFit: "cover", zIndex: "100" }}
+          quality={100}
+        />
+      </LogoContainer>
     </InputContainer>
   );
 }
@@ -22,7 +31,7 @@ const InputContainer = styled.div`
   justify-content: center;
   align-items: center;
   margin-bottom: 2vh;
-  h1 {
+  p {
     width: 100%;
     margin-bottom: 0.3vh;
   }
@@ -41,7 +50,12 @@ const InputContainer = styled.div`
     }
     padding-left: 1vh;
     padding-right: 1vh;
-    
+  }
+  @media only screen and (max-width: 768px) {
+    p {
+      font-size: 13px;
+      margin-bottom: 5px;
+    }
   }
 `;
 
@@ -52,4 +66,16 @@ const InputStyled = styled.input`
   padding-left: 1vh;
   padding-right: 1vh;
   border: 1px solid grey;
+`;
+
+const LogoContainer = styled.div`
+  display: none;
+  @media only screen and (max-width: 768px) {
+    display: block;
+    position: absolute;
+    top: -50px;
+    right: calc(50% - 48px);
+    width: 90px;
+    height: 30px;
+  }
 `;

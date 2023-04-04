@@ -17,7 +17,14 @@ export const AuthContainer = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-color: rgba(266, 266, 266, 0.5);
+  background-color: rgba(266, 266, 266, 0.3);
+  position: relative;
+
+  h1 {
+    font-weight: 800;
+    font-size: 3vh;
+    margin-bottom: 5vh;
+  }
 `;
 
 export const SubmitButton = styled.button`
@@ -47,4 +54,11 @@ export const LinkTo = styled(Link)`
     span {
         font-weight: 700;
     }
+
+    @media only screen and (max-width: 768px) {
+              font-size: 13px;
+              width: 100%;
+              text-align: center;
+              margin-bottom: 5px;
+          }
 `

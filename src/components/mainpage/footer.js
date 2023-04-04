@@ -1,11 +1,17 @@
 import styled from "styled-components";
-import background from "../../../public/images/logo.png";
+import Image from "next/image";
 
 export default function Footer() {
   return (
     <FooterContainer>
       <FooterContent>
-        <img src={background.src} />
+        <LogoContainer>
+          <Image
+            src={"/images/logo.png"}
+            fill
+            style={{ objectFit: "cover", zIndex: "100" }}
+          />
+        </LogoContainer>
         <div>
           <p>
             © 2023 Musichems Inc
@@ -34,16 +40,17 @@ const FooterContent = styled.div`
   justify-content: flex-start;
   align-items: center;
 
-p {
+  p {
     color: #fff;
     line-height: 130%;
     font-size: 1.2vh;
-}
-
-  img {
-    height: 7vh;
-    width: auto;
-    margin-left: 2vh;
-    margin-right: 2vh;
   }
+`;
+
+const LogoContainer = styled.div`
+  height: 7vh;
+  width: 8vh;
+  margin-left: 2vh;
+  margin-right: 2vh;
+  position: relative;
 `;

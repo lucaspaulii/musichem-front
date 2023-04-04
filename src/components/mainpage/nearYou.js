@@ -14,12 +14,14 @@ export default function NearYou() {
 
   return (
     <NearYouContainer>
-      <h1 onClick={(e) => Router.push("/construction")}>Near You</h1>
+      <h1>Near You</h1>
       <ArtistsContainer>
         {nearArtists?.length > 0 &&
-          nearArtists.map((artist) => <ArtistCard artist={artist} />)}
+          nearArtists.map((artist, i) => <ArtistCard key={i} artist={artist} index={i}/>)}
       </ArtistsContainer>
-      <h2 onClick={(e) => Router.push("/construction")}>See More...</h2>
+      <ClickableH1 onClick={(e) => Router.push("/construction")}>
+        See More...
+      </ClickableH1>
     </NearYouContainer>
   );
 }
@@ -35,20 +37,33 @@ const NearYouContainer = styled.div`
     height: 1.5vh;
     margin-bottom: 1vh;
     font-weight: 700;
-    transition: scale 0.5s ease-in;
-    :hover {
-      cursor: pointer;
+  }
+  @media only screen and (max-width: 768px) {
+    width: 100%;
+    height: 46%;
+
+    h1 {
+      font-size: 13px;
+      margin-bottom: 9px;
+      font-weight: 500;
     }
   }
-  h2 {
-    margin-top: 1vh;
-    width: 100%;
-    height: 1.5vh;
-    text-align: end;
-    font-weight: 700;
-    :hover {
-      cursor: pointer;
-    }
+`;
+
+const ClickableH1 = styled.h1`
+  transition: all 0.2s ease-in;
+  :hover {
+    cursor: pointer;
+    transform: scale(1.01)
+  }
+  margin-top: 1vh;
+  text-align: end;
+
+  @media only screen and (max-width: 768px) {
+   
+      font-size: 12px;
+      margin-top: 5px;
+
   }
 `;
 
@@ -58,4 +73,10 @@ const ArtistsContainer = styled.div`
   align-items: center;
   height: 30vh;
   background-color: #d9d9d930;
+
+  @media only screen and (max-width: 768px) {
+    flex-wrap: wrap;
+    height: 38vh;
+    justify-content: space-around;
+  }
 `;

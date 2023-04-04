@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { AnimationOnScroll } from "react-animation-on-scroll";
 import styled from "styled-components";
 
@@ -20,7 +21,7 @@ export default function About() {
         </p>
       </ContentContainer>
       <ImageContainer>
-        <AboutImage src={"/images/aboutimg.jpeg"} />
+        <Image src={"/images/aboutimg.jpeg"} fill style={{objectFit:"cover", zIndex: "800"}}/>
       </ImageContainer>
     </AboutContainer>
   );
@@ -67,15 +68,28 @@ const ContentContainer = styled.div`
     text-align: left;
     font-size: 2vh;
   }
+
+  @media only screen and (max-width: 768px) {
+    z-index: 800;
+    h3, p {
+      width: 80%;
+    }
+    h2 {
+      margin-bottom: 30px;
+      font-size: 4vh;
+    }
+    h3 {
+      font-size: 2.2vh;
+    }
+    p {
+      font-size: 1.9vh;
+    }
+}
 `;
 
 const ImageContainer = styled.div`
   height: 100%;
   width: 33%;
   overflow: hidden;
-`;
-
-const AboutImage = styled.img`
-  height: 100%;
-  width: auto;
+  position: relative;
 `;
