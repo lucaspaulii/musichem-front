@@ -15,7 +15,7 @@ export default function Sign_in() {
         {inup === "up" && <SingUp />}
       </LeftDiv>
       <RightDiv>
-        <img src="/images/logo2.png" onClick={(e) => Router.push("/")} />
+        <img src="/images/logo2.png" onClick={(e) => Router.push("/")} alt="logo"/>
       </RightDiv>
     </AuthContainer>
   );

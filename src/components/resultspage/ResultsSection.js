@@ -3,13 +3,15 @@ import { useEffect, useState } from "react";
 import styled from "styled-components";
 import ArtistCard from "../mainpage/artistCard";
 import Image from "next/image";
+import useSearchedArtist from "@/hooks/useSearchedArtist";
 
 export default function ResultsSection({ searchParams }) {
-  const [nearArtists, setNearArtists] = useState([]);
-  const response = useNearArtist();
+  const [nearArtists, setNearArtists] = useState();
+  const response = useSearchedArtist(searchParams.location.lat, searchParams.location.lng, searchParams.type, searchParams.style);
 
   useEffect(() => {
     setNearArtists(response.artists);
+    console.log(response.artists)
   }, [response.artistsLoading]);
 
   return (
@@ -19,23 +21,24 @@ export default function ResultsSection({ searchParams }) {
         fill
         style={{ objectFit: "cover", zIndex: "100" }}
         quality={50}
+        alt="background"
       />
       <ResultsArtists>
         <h1>
-          There are {nearArtists?.length} {searchParams?.style}{" "}
+          There are {nearArtists ? nearArtists.data.length : "no"} {searchParams?.style}{" "}
           {searchParams?.type}s near {searchParams?.address}
         </h1>
         <ArtistsContainer>
-          {nearArtists?.length > 0 &&
-            nearArtists.map((artist) => (
+          {nearArtists?.data.length > 0 &&
+            nearArtists.data.map((artist) => (
               <ArtistCard artist={artist} route={"results"} />
             ))}
-          {nearArtists?.length > 0 &&
-            nearArtists.map((artist) => (
+          {nearArtists?.data.length > 0 &&
+            nearArtists.data.map((artist) => (
               <ArtistCard artist={artist} route={"results"} />
             ))}
-          {nearArtists?.length > 0 &&
-            nearArtists.map((artist) => (
+          {nearArtists?.data.length > 0 &&
+            nearArtists.data.map((artist) => (
               <ArtistCard artist={artist} route={"results"} />
             ))}
         </ArtistsContainer>
@@ -92,5 +95,6 @@ const ArtistsContainer = styled.div`
   @media only screen and (max-width: 768px) {
     width: 100%;
     height: 250px;
+    justify-content: space-around;
   }
 `;

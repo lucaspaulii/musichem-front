@@ -5,7 +5,7 @@ import Image from "next/image";
 export default function Oportunity() {
   return (
     <OportunityContainer>
-      <Image src={"/images/oportunityimg.jpeg"} fill style={{objectFit:"cover", zIndex:"200"}}/>
+      <Image src={"/images/oportunityimg.jpeg"} fill style={{objectFit:"cover", zIndex:"200"}} alt="street musician"/>
       <OportunityTitleContainer>
         <h1>Sometimes they only need</h1>
         <AnimationOnScroll animateIn="animate__bounceIn">

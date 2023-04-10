@@ -11,6 +11,7 @@ export default function Special() {
           src={"/images/specialimg.jpeg"}
           fill
           style={{ objectFit: "cover" }}
+          alt="local musician"
         />
       </ImageContainer>
       <ContentContainer>
@@ -108,7 +109,7 @@ const ContentContainer = styled.div`
       font-size: 1.8vh;
     }
     p {
-      font-size: 2.0vh;
+      font-size: 2vh;
       width: 80%;
       text-align: left;
       margin-bottom: 20px;
@@ -168,4 +169,5 @@ const Button = styled.button`
       font-size: 14px;
       font-weight: 600;
     }
+  }
 `;

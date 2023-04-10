@@ -4,20 +4,33 @@ import styled from "styled-components";
 import ArtistCard from "./artistCard";
 import Router from "next/router";
 
-export default function NearYou() {
-  const [nearArtists, setNearArtists] = useState([]);
-  const response = useNearArtist();
+export default function NearYou({ location }) {
+  const [nearArtists, setNearArtists] = useState();
+  const [loading, setLoading] = useState(true);
+  const response = useNearArtist(location.latitude, location.longitude);
 
   useEffect(() => {
     setNearArtists(response.artists);
   }, [response.artistsLoading]);
 
+  useEffect(() => {
+    if (nearArtists) {
+      console.log(nearArtists);
+      setLoading(false);
+    }
+  }, [nearArtists]);
+
   return (
     <NearYouContainer>
       <h1>Near You</h1>
       <ArtistsContainer>
-        {nearArtists?.length > 0 &&
-          nearArtists.map((artist, i) => <ArtistCard key={i} artist={artist} index={i}/>)}
+        {loading ? (
+          <h2>Loading...</h2>
+        ) : (
+          nearArtists.data.map((artist, i) => (
+            <ArtistCard key={i} artist={artist} index={i} />
+          ))
+        )}
       </ArtistsContainer>
       <ClickableH1 onClick={(e) => Router.push("/construction")}>
         See More...
@@ -54,16 +67,14 @@ const ClickableH1 = styled.h1`
   transition: all 0.2s ease-in;
   :hover {
     cursor: pointer;
-    transform: scale(1.01)
+    transform: scale(1.01);
   }
   margin-top: 1vh;
   text-align: end;
 
   @media only screen and (max-width: 768px) {
-   
-      font-size: 12px;
-      margin-top: 5px;
-
+    font-size: 12px;
+    margin-top: 5px;
   }
 `;
 
@@ -73,6 +84,10 @@ const ArtistsContainer = styled.div`
   align-items: center;
   height: 30vh;
   background-color: #d9d9d930;
+  h2 {
+    width: 100%;
+    text-align: center;
+  }
 
   @media only screen and (max-width: 768px) {
     flex-wrap: wrap;

@@ -10,6 +10,7 @@ export default function Footer() {
             src={"/images/logo.png"}
             fill
             style={{ objectFit: "cover", zIndex: "100" }}
+            alt="logo"
           />
         </LogoContainer>
         <div>

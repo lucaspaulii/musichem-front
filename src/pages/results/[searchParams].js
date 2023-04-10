@@ -2,21 +2,27 @@ import Header from "@/components/resultspage/Header";
 import ResultsSection from "@/components/resultspage/ResultsSection";
 import styled from "styled-components";
 import { useRouter } from "next/router";
+import { useEffect, useState } from "react";
 
 export default function Results() {
   const router = useRouter();
-  const { searchParams } = router.query;
+  const [params, setParams] = useState(undefined);
+
+  useEffect(() => {
+    const { searchParams } = router.query;
+    if (searchParams) {
+      setParams(JSON.parse(searchParams));
+    }
+  }, [router]);
 
   return (
     <>
-      <ResultsContainer>
-        <Header
-          searchParams={searchParams ? JSON.parse(searchParams) : undefined}
-        />
-        <ResultsSection
-          searchParams={searchParams ? JSON.parse(searchParams) : undefined}
-        />
-      </ResultsContainer>
+      {params && (
+        <ResultsContainer>
+          <Header searchParams={params} />
+          <ResultsSection searchParams={params} />
+        </ResultsContainer>
+      )}
     </>
   );
 }

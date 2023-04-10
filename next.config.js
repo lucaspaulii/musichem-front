@@ -6,6 +6,7 @@ const nextConfig = {
   },
   env: {
     NEXT_PUBLIC_MAPS_KEY: process.env.NEXT_PUBLIC_MAPS_KEY,
+    NEXT_PUBLIC_API_URL: process.env.NEXT_PUBLIC_API_URL,
   },
   images: {
     remotePatterns: [
@@ -14,6 +15,10 @@ const nextConfig = {
         hostname: 's3-alpha-sig.figma.com',
         port: '',
         pathname: '/img/**',
+      },
+      {
+        protocol: 'https',
+        hostname: '**',
       },
     ],
   },

@@ -3,13 +3,25 @@ import background from "../../../public/images/mainpagebg.jpeg";
 import { BsPersonCircle } from "react-icons/bs";
 import MainSearch from "./mainSearch";
 import NearYou from "./nearYou";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import ProfileModal from "./ProfileModal";
 import Router from "next/router";
 import Image from "next/image";
 
 export default function Cover() {
   const [modal, setModal] = useState(false);
+  const [location, setLocation] = useState(undefined);
+
+  useEffect(() => {
+    if ("geolocation" in navigator) {
+      navigator.geolocation.getCurrentPosition(({ coords }) => {
+        const { latitude, longitude } = coords;
+        setLocation({ latitude, longitude });
+      });
+    } else {
+      setLocation({ latitude: -27.5935, longitude: -48.55854 });
+    }
+  }, []);
 
   function handleClick(e) {
     e.preventDefault();
@@ -23,6 +35,7 @@ export default function Cover() {
         fill
         style={{ objectFit: "cover", zIndex: "100" }}
         quality={50}
+        alt = "stage"
       />
       <ContentContainer>
         <LogoContainer>
@@ -31,10 +44,11 @@ export default function Cover() {
             fill
             style={{ objectFit: "cover", zIndex: "100" }}
             quality={100}
+            alt="logo"
           />
         </LogoContainer>
         <MainSearch route={"main"} />
-        <NearYou />
+        {location && <NearYou location={location} />}
       </ContentContainer>
       <Icon
         size={"3.6vh"}

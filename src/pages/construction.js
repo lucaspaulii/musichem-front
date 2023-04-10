@@ -8,7 +8,7 @@ export default function Construction() {
       <ConstructionDiv>
         <BackOne />
         <div>
-          <img src="/images/logo2.png" onClick={(e) => Router.push("/")} />
+          <img src="/images/logo2.png" onClick={(e) => Router.push("/")} alt="logo"/>
         </div>
 
         <h1>WE'RE SETTING UP THIS STAGE FOR YOU!</h1>

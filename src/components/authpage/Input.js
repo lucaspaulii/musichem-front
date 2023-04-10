@@ -14,6 +14,7 @@ export default function Input({ text, type }) {
       <LogoContainer>
         <Image
           src={"/images/logo2.png"}
+          alt="logo"
           fill
           style={{ objectFit: "cover", zIndex: "100" }}
           quality={100}

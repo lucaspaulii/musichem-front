@@ -2,35 +2,55 @@ import styled from "styled-components";
 import css from "styled-jsx/css";
 import Router from "next/router";
 import Image from "next/image";
+import { useEffect, useState } from "react";
 
 export default function ArtistCard({ artist, route, index }) {
+  const [artistName, setArtistName] = useState();
+
+  useEffect(() => {
+    const name = handleArtistName(artist.artistName);
+    setArtistName(name)
+  }, [])
+
+  const handleArtistName = (artistName) => {
+    if (artistName.length > 20) {
+      return `${artistName.slice(0, 18)}...`
+    } else {
+      return artistName
+    }
+  }
+
   return (
     <Card
       route={route}
       onClick={(e) => Router.push("/construction")}
       index={index}
     >
-      <ImgContainer>
-        <Image
-          src={artist.coverImg}
-          fill
-          alt={artist.name}
-          style={{ objectFit: "cover" }}
-        />
-      </ImgContainer>
-      <NameInfo route={route}>
-        <h3>{artist.name}</h3>
-        <h4>{artist.rating.toFixed(1)}★</h4>
-      </NameInfo>
-      <OtherInfo route={route}>
-        <h5>
-          {artist.type} / {artist.style.map((s) => ` ${s} `)}
-        </h5>
-        <h6>Starting from ${artist.price[0].price}</h6>
-        <h6>
-          <span>{artist.location}</span>
-        </h6>
-      </OtherInfo>
+      {artist && (
+        <>
+          <ImgContainer>
+            <Image
+              src={artist.coverPicture}
+              fill
+              alt="artist"
+              style={{ objectFit: "cover" }}
+            />
+          </ImgContainer>
+          <NameInfo route={route}>
+            <h3>{artistName}</h3>
+            <h4>{artist.rating.toFixed(1)}★</h4>
+          </NameInfo>
+          <OtherInfo route={route}>
+            <h5>
+              {artist.type} / {artist.genre}
+            </h5>
+            <h6>Starting from ${artist.price}</h6>
+            <h6>
+              <span>{artist.distance}km away from you</span>
+            </h6>
+          </OtherInfo>
+        </>
+      )}
     </Card>
   );
 }
@@ -55,7 +75,7 @@ const Card = styled.div`
       flex-shrink: 0;
 
       @media only screen and (max-width: 768px) {
-        transform: scale(1.0);
+        transform: scale(1);
         height: 205px !important;
         width: 160px !important;
         margin: 10px;
@@ -94,14 +114,14 @@ const ImgContainer = styled.div`
 `;
 
 const NameInfo = styled.div`
-  height: 4vh;
+  height: 4.3vh;
   display: flex;
   justify-content: space-between;
   width: 80%;
   h3 {
     font-size: 1.7vh;
     font-weight: 700;
-    width: 85%;
+    width: 83%;
   }
   h4 {
     font-weight: 400;
@@ -112,10 +132,25 @@ const NameInfo = styled.div`
 
   @media only screen and (max-width: 768px) {
     flex-direction: column;
+    height: 3.5vh;
     h3 {
       width: 100%;
+      font-size: 11px !important;
+    }
+    h4 {
+      font-size: 11px !important;
+      margin-bottom: 2px;
     }
   }
+
+  ${(props) =>
+    props.route === "results" &&
+    css`
+    background-color: none;
+    h3 {
+      font-size: 1.5vh;
+    }
+    `}
 `;
 
 const OtherInfo = styled.div`
@@ -138,6 +173,7 @@ const OtherInfo = styled.div`
     props.route === "results"
       ? css`
           @media only screen and (max-width: 768px) {
+           font-size: 10px;
             h6 {
               font-weight: 700;
             }

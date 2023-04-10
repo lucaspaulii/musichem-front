@@ -21,7 +21,7 @@ export default function About() {
         </p>
       </ContentContainer>
       <ImageContainer>
-        <Image src={"/images/aboutimg.jpeg"} fill style={{objectFit:"cover", zIndex: "800"}}/>
+        <Image src={"/images/aboutimg.jpeg"} fill style={{objectFit:"cover", zIndex: "800"}} alt="empty stage"/>
       </ImageContainer>
     </AboutContainer>
   );

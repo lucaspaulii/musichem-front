@@ -1,18 +1,18 @@
 import artistService from "@/services/artistsServices";
 import useAsync from "./useAsync";
 
-export default function useNearArtist(lat, lng) {
+export default function useSearchedArtist(lat, lng, type, genre) {
   const {
     data: artists,
     loading: artistsLoading,
     error: artistsError,
-    act: getNearArtists,
-  } = useAsync(() => artistService.getNearArtists(lat, lng));
+    act: getSearchedArtists,
+  } = useAsync(() => artistService.getSearchedArtists(lat, lng, type, genre));
 
   return {
     artists,
     artistsLoading,
     artistsError,
-    getNearArtists,
+    getSearchedArtists,
   };
 }
