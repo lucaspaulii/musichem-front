@@ -37,17 +37,6 @@ export default function MusicalStyleSearch({ setStyle, searchParams, route }) {
     return string.charAt(0).toUpperCase() + string.slice(1);
   };
 
-  function checkIfIsFilled() {
-    console.log(value);
-    if (musicalStyles.includes(value.toLowerCase)) {
-      console.log("hey");
-      return true;
-    } else {
-      console.log("nah");
-      return false;
-    }
-  }
-
   return (
     <Combobox onSelect={handleSelect}>
       <Input

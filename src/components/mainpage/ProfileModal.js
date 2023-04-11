@@ -7,7 +7,6 @@ import "react-toastify/dist/ReactToastify.css";
 
 export default function ProfileModal({ modal, setModal }) {
   const { userData } = useContext(UserContext);
-  console.log(userData);
 
   function handleClick(route) {
     if (userData.token) {
@@ -22,7 +21,7 @@ export default function ProfileModal({ modal, setModal }) {
         theme: "dark",
       });
     } else {
-      Router.push(`/auth/sign/${route}`)
+      Router.push(`/auth/sign/${route}`);
     }
   }
 

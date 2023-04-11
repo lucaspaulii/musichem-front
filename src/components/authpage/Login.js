@@ -18,11 +18,8 @@ export default function Login() {
 
   async function handleSubmit(e) {
     e.preventDefault();
-    console.log(formInfo);
-
     try {
       const userData = await signIn(formInfo);
-      console.log(userData);
       setUserData(userData);
       toast.success("Login successfully!", {
         position: "top-right",

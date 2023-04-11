@@ -11,7 +11,6 @@ export default function Special() {
   const { userData } = useContext(UserContext);
 
   function handleAuthClick(type) {
-    console.log(userData);
     if (userData.token && type === "artist") {
       Router.push("/construction");
     } else if (userData.token && type === "contractor") {

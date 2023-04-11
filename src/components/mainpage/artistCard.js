@@ -9,25 +9,29 @@ export default function ArtistCard({ artist, route, index }) {
 
   useEffect(() => {
     const name = handleArtistName(artist.artistName);
-    setArtistName(name)
-  }, [])
+    setArtistName(name);
+  }, []);
 
   const handleArtistName = (artistName, route) => {
     if (artistName.length > 20 && route === "results") {
-      return `${artistName.slice(0, 18)}...`
+      return `${artistName.slice(0, 18)}...`;
     } else if (artistName.length > 30) {
-      return `${artistName.slice(0, 28)}...`
+      return `${artistName.slice(0, 28)}...`;
     } else {
-      return artistName
+      return artistName;
     }
-  }
+  };
+
+  const handleClick = () => {
+    const properties = {
+      type: "artist",
+      id: artist._id.$oid,
+    };
+    Router.push(`/profile/${JSON.stringify(properties)}`);
+  };
 
   return (
-    <Card
-      route={route}
-      onClick={(e) => Router.push("/construction")}
-      index={index}
-    >
+    <Card route={route} onClick={handleClick} index={index}>
       {artist && (
         <>
           <ImgContainer>
@@ -147,26 +151,26 @@ const NameInfo = styled.div`
       margin-bottom: 2px;
     }
     ${(props) =>
-    props.route === "results" &&
-    css`
-      h3 {
-      width: 100%;
-      font-size: 11px !important;
-    }
-      h4 {
-      font-size: 11px !important;
-      margin-bottom: 2px;
-    }
-    `}
+      props.route === "results" &&
+      css`
+        h3 {
+          width: 100%;
+          font-size: 11px !important;
+        }
+        h4 {
+          font-size: 11px !important;
+          margin-bottom: 2px;
+        }
+      `}
   }
 
   ${(props) =>
     props.route === "results" &&
     css`
-    background-color: none;
-    h3 {
-      font-size: 1.5vh;
-    }
+      background-color: none;
+      h3 {
+        font-size: 1.5vh;
+      }
     `}
 `;
 
@@ -190,7 +194,7 @@ const OtherInfo = styled.div`
     props.route === "results"
       ? css`
           @media only screen and (max-width: 768px) {
-           font-size: 10px;
+            font-size: 10px;
             h6 {
               font-weight: 700;
             }

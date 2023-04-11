@@ -15,7 +15,6 @@ export default function NearYou({ location }) {
 
   useEffect(() => {
     if (nearArtists) {
-      console.log(nearArtists);
       setLoading(false);
     }
   }, [nearArtists]);

@@ -1,4 +1,3 @@
-import useNearArtist from "@/hooks/useNearArtist";
 import { useEffect, useState } from "react";
 import styled from "styled-components";
 import ArtistCard from "../mainpage/artistCard";
@@ -7,11 +6,15 @@ import useSearchedArtist from "@/hooks/useSearchedArtist";
 
 export default function ResultsSection({ searchParams }) {
   const [nearArtists, setNearArtists] = useState();
-  const response = useSearchedArtist(searchParams.location.lat, searchParams.location.lng, searchParams.type, searchParams.style);
+  const response = useSearchedArtist(
+    searchParams.location.lat,
+    searchParams.location.lng,
+    searchParams.type,
+    searchParams.style
+  );
 
   useEffect(() => {
     setNearArtists(response.artists);
-    console.log(response.artists)
   }, [response.artistsLoading]);
 
   return (
@@ -25,18 +28,11 @@ export default function ResultsSection({ searchParams }) {
       />
       <ResultsArtists>
         <h1>
-          There are {nearArtists ? nearArtists.data.length : "no"} {searchParams?.style}{" "}
-          {searchParams?.type}s near {searchParams?.address}
+          There are {nearArtists ? nearArtists.data.length : "no"}{" "}
+          {searchParams?.style} {searchParams?.type}s near{" "}
+          {searchParams?.address}
         </h1>
         <ArtistsContainer>
-          {nearArtists?.data.length > 0 &&
-            nearArtists.data.map((artist) => (
-              <ArtistCard artist={artist} route={"results"} />
-            ))}
-          {nearArtists?.data.length > 0 &&
-            nearArtists.data.map((artist) => (
-              <ArtistCard artist={artist} route={"results"} />
-            ))}
           {nearArtists?.data.length > 0 &&
             nearArtists.data.map((artist) => (
               <ArtistCard artist={artist} route={"results"} />
@@ -87,7 +83,7 @@ const ArtistsContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: flex-start;
   align-items: center;
   height: 30vh;
   flex-shrink: 0;

@@ -53,7 +53,6 @@ export default function SingUp() {
           Router.back();
         }, 3000);
       } catch (error) {
-        console.log(error);
         toast.error("something went wrong", {
           position: "top-right",
           autoClose: 5000,

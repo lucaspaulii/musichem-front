@@ -31,7 +31,6 @@ export default function Cover() {
   }
 
   function handleAuthClick(e) {
-    console.log(userData)
     if (!userData.token) {
       Router.push("/auth/sign/in")
     } else {

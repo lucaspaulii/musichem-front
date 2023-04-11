@@ -16,9 +16,11 @@
     "next": "13.2.4",
     "react": "18.2.0",
     "react-animation-on-scroll": "^5.1.0",
+    "react-calendar": "^4.2.1",
     "react-datepicker": "^4.10.0",
     "react-dom": "18.2.0",
     "react-icons": "^4.8.0",
+    "react-responsive-carousel": "^3.2.23",
     "react-toastify": "^9.1.2",
     "styled-components": "^5.3.9",
     "use-places-autocomplete": "^4.0.0"
