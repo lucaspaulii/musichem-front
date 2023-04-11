@@ -5,11 +5,11 @@ import {
   ComboboxList,
   ComboboxOption,
 } from "@reach/combobox";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import "@reach/combobox/styles.css";
 import { useEffect, useState } from "react";
 
-export default function TypeSearch({ setType, searchParams }) {
+export default function TypeSearch({ setType, searchParams, route }) {
   const [value, setValue] = useState("");
   const [isFilled, setIsFilled] = useState(false);
 
@@ -37,6 +37,8 @@ export default function TypeSearch({ setType, searchParams }) {
           setValue(e.target.value);
         }}
         required={true}
+        placeholder="Band, DJ ..."
+        route={route}
       />
       <ComboboxPopover hidden={isFilled} style={{ zIndex: 3000 }}>
         <ComboboxList hidden={isFilled}>
@@ -56,8 +58,27 @@ const Input = styled(ComboboxInput)`
   border: 1px solid grey;
   height: 4vh;
   width: 5vw;
+  background-color: transparent;
+  color: #fff;
+  border: 0.5px solid #ffffff60;
+  ::placeholder {
+            color: #ffffff60;
+          }
+
+  ${(props) =>
+    props.route === "results" &&
+    css`
+      background-color: #fff;
+      color: #000;
+      border: 0.5px solid #00000060;
+    `}
 
   @media only screen and (max-width: 768px) {
     width: 150px; 
+    background-color: #ffffff90;
+    color: #000;
+    ::placeholder {
+      color: #00000090;
+    }
 }
 `;

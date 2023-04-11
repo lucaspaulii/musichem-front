@@ -2,10 +2,37 @@ import styled from "styled-components";
 import { AnimationOnScroll } from "react-animation-on-scroll";
 import Router from "next/router";
 import Image from "next/image";
+import { useContext } from "react";
+import UserContext from "@/context/UserContext";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export default function Special() {
+  const { userData } = useContext(UserContext);
+
+  function handleAuthClick(type) {
+    console.log(userData);
+    if (userData.token && type === "artist") {
+      Router.push("/construction");
+    } else if (userData.token && type === "contractor") {
+      toast("You already have a profile!", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+      });
+    } else {
+      Router.push("/auth/sign/in");
+    }
+  }
+
   return (
     <SpecialContainer>
+      <ToastContainer />
       <ImageContainer>
         <Image
           src={"/images/specialimg.jpeg"}
@@ -27,7 +54,7 @@ export default function Special() {
           <AnimationOnScroll animateIn="animate__flipInX">
             <Button
               color={"#F00241"}
-              onClick={(e) => Router.push("/construction")}
+              onClick={() => handleAuthClick("artist")}
             >
               Set up your <br /> <span> ARTIST PROFILE </span>
             </Button>
@@ -35,7 +62,7 @@ export default function Special() {
           <AnimationOnScroll animateIn="animate__flipInX">
             <Button
               color={"#F88922"}
-              onClick={(e) => Router.push("/construction")}
+              onClick={() => handleAuthClick("contractor")}
             >
               Set up your <br /> <span> CONTRACTOR PROFILE </span>
             </Button>

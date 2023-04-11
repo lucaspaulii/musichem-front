@@ -1,13 +1,38 @@
 import styled from "styled-components";
 import Router from "next/router";
+import UserContext from "@/context/UserContext";
+import { useContext } from "react";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export default function ProfileModal({ modal, setModal }) {
+  const { userData } = useContext(UserContext);
+  console.log(userData);
+
+  function handleClick(route) {
+    if (userData.token) {
+      toast("You are already logged in!", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+      });
+    } else {
+      Router.push(`/auth/sign/${route}`)
+    }
+  }
+
   return (
     <Modal openModal={modal}>
+      <ToastContainer />
       <h1>Hello, Visitor</h1>
       <FirstSection>
-        <a onClick={(e) => Router.push("/auth/sign/up")}>New here? Sign up</a>
-        <a onClick={(e) => Router.push("/auth/sign/in")}>Log in</a>
+        <a onClick={(e) => handleClick("up")}>New here? Sign up</a>
+        <a onClick={(e) => handleClick("in")}>Log in</a>
       </FirstSection>
       <SecondSection>
         <a href="#">Musichem yourself!</a>
@@ -65,7 +90,7 @@ const Modal = styled.div`
     a {
       font-size: 15px;
     }
-}
+  }
 `;
 
 const FirstSection = styled.div`

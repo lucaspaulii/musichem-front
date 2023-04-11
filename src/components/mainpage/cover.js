@@ -3,14 +3,16 @@ import background from "../../../public/images/mainpagebg.jpeg";
 import { BsPersonCircle } from "react-icons/bs";
 import MainSearch from "./mainSearch";
 import NearYou from "./nearYou";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import ProfileModal from "./ProfileModal";
 import Router from "next/router";
 import Image from "next/image";
+import UserContext from "@/context/UserContext";
 
 export default function Cover() {
   const [modal, setModal] = useState(false);
   const [location, setLocation] = useState(undefined);
+  const { userData } = useContext(UserContext);
 
   useEffect(() => {
     if ("geolocation" in navigator) {
@@ -26,6 +28,15 @@ export default function Cover() {
   function handleClick(e) {
     e.preventDefault();
     setModal(!modal);
+  }
+
+  function handleAuthClick(e) {
+    console.log(userData)
+    if (!userData.token) {
+      Router.push("/auth/sign/in")
+    } else {
+      Router.push("/construction")
+    }
   }
 
   return (
@@ -56,7 +67,7 @@ export default function Cover() {
         color={modal ? "#000" : "#FFF"}
       />
       {modal && <ProfileModal modal={modal} setModal={setModal} />}
-      <ArtistLink onClick={(e) => Router.push("/construction")}>
+      <ArtistLink onClick={handleAuthClick}>
         ARTIST? CLICK HERE
       </ArtistLink>
     </CoverContainer>

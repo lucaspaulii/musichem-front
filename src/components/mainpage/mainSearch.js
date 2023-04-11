@@ -36,6 +36,7 @@ export default function MainSearch({ route, searchParams }) {
             <Places
               setLocation={setLocation}
               setAddress={setAddress}
+              route={route}
               searchParams={
                 searchParams
                   ? {
@@ -51,6 +52,7 @@ export default function MainSearch({ route, searchParams }) {
             <DatePicker
               setDate={setDate}
               searchParams={searchParams ? searchParams.date : undefined}
+              route={route}
             />
           </InputContainer>
           <InputContainer route={route}>
@@ -58,6 +60,7 @@ export default function MainSearch({ route, searchParams }) {
             <MusicalStyleSearch
               setStyle={setStyle}
               searchParams={searchParams ? searchParams.style : undefined}
+              route={route}
             />
           </InputContainer>
           <InputContainer route={route}>
@@ -65,10 +68,11 @@ export default function MainSearch({ route, searchParams }) {
             <TypeSearch
               setType={setType}
               searchParams={searchParams ? searchParams.type : undefined}
+              route={route}
             />
           </InputContainer>
           <SearchContainer type="submit" route={route}>
-            <SearchIcon size={"3vh"} route={route}/>
+            <SearchIcon size={"2.6vh"} route={route} />
           </SearchContainer>
         </InputsContainer>
       </form>
@@ -81,8 +85,21 @@ const InputsContainer = styled.div`
   justify-content: center;
   align-items: center;
   height: 10vh;
+  background-color: #13111FDF;
+  border: 3px solid;
+  border-image-slice: 1;
+  border-image-source: linear-gradient(to right, #4259B0, #FBA73E);
+  padding-left: 3vh;
+  ${(props) =>
+    props.route === "results" &&
+    css`
+      border: none;
+      background-color: transparent;
+    `}
   @media only screen and (max-width: 768px) {
     flex-direction: column;
+    background-color: transparent;
+    border: none;
     ${(props) =>
       props.route === "results"
         ? css`
@@ -161,14 +178,12 @@ const InputContainer = styled.div`
 
 const SearchIcon = styled(FaSearch)`
   color: #fff;
-  filter: drop-shadow(0px 0px 1px #fff);
   transition: all 0.2s ease-in;
   :hover {
     cursor: pointer;
     transform: scale(1.3);
   }
   @media only screen and (max-width: 768px) {
-    
     ${(props) =>
       props.route === "results"
         ? css`

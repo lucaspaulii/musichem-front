@@ -12,9 +12,11 @@ export default function ArtistCard({ artist, route, index }) {
     setArtistName(name)
   }, [])
 
-  const handleArtistName = (artistName) => {
-    if (artistName.length > 20) {
+  const handleArtistName = (artistName, route) => {
+    if (artistName.length > 20 && route === "results") {
       return `${artistName.slice(0, 18)}...`
+    } else if (artistName.length > 30) {
+      return `${artistName.slice(0, 28)}...`
     } else {
       return artistName
     }
@@ -108,7 +110,7 @@ const ImgContainer = styled.div`
   }
 
   @media only screen and (max-width: 768px) {
-    height: 55%;
+    height: 65%;
     margin-bottom: 5px;
   }
 `;
@@ -132,15 +134,30 @@ const NameInfo = styled.div`
 
   @media only screen and (max-width: 768px) {
     flex-direction: column;
-    height: 3.5vh;
+    height: 4vh;
     h3 {
+      width: 100%;
+      font-size: 9px !important;
+      overflow: hidden;
+      padding-bottom: px;
+    }
+    h4 {
+      margin-top: 2px;
+      font-size: 9px !important;
+      margin-bottom: 2px;
+    }
+    ${(props) =>
+    props.route === "results" &&
+    css`
+      h3 {
       width: 100%;
       font-size: 11px !important;
     }
-    h4 {
+      h4 {
       font-size: 11px !important;
       margin-bottom: 2px;
     }
+    `}
   }
 
   ${(props) =>

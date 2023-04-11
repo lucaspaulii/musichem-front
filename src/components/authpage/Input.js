@@ -1,15 +1,50 @@
 import styled from "styled-components";
 import Places from "../searches/locationSearch";
 import Image from "next/image";
+import { useEffect, useState } from "react";
 
-export default function Input({ text, type }) {
+export default function Input({ text, type, setFormInfo, formInfo, field }) {
+  const [placeHolder, setPlaceHolder] = useState(undefined);
+
+  useEffect(() => {
+    text == "DESCRIPTION" &&
+      setPlaceHolder("How you want the artists to know you?");
+    text == "EMAIL" && setPlaceHolder("johndoe@johndoe.com");
+    text == "NAME" && setPlaceHolder("Your personal name here!");
+    text == "PASSWORD" && setPlaceHolder("Keep it safe!");
+    text == "CONFIRM PASSWORD" &&
+      setPlaceHolder("Type you password to confirm it!");
+    text == "PICTURE" &&
+      setPlaceHolder(
+        "A beautiful image URL that shows you or your place! (optional)"
+      );
+    text == "BUSINESS NAME" &&
+      setPlaceHolder("How is your place called? (for business only)");
+  }, []);
+
+  function handleChange(e) {
+    if (field == "pictures") {
+      formInfo.pictures = [];
+      formInfo.pictures[0] = e.target.value;
+      setFormInfo(formInfo);
+      return;
+    }
+    const newInfo = { ...formInfo, [field]: e.target.value };
+    setFormInfo(newInfo);
+  }
+
   return (
     <InputContainer>
       <p>{text}</p>
       {type === "location" ? (
-        <Places route="auth" />
+        <Places route="auth" setFormInfo={setFormInfo} formInfo={formInfo} />
       ) : (
-        <InputStyled type={type} required />
+        <InputStyled
+          type={type}
+          required
+          placeholder={placeHolder}
+          onChange={handleChange}
+        />
       )}
       <LogoContainer>
         <Image
@@ -56,6 +91,7 @@ const InputContainer = styled.div`
     p {
       font-size: 13px;
       margin-bottom: 5px;
+      width: 260px;
     }
   }
 `;
@@ -67,6 +103,11 @@ const InputStyled = styled.input`
   padding-left: 1vh;
   padding-right: 1vh;
   border: 1px solid grey;
+
+  @media only screen and (max-width: 768px) {
+    width: 260px !important;
+    height: 30px !important;
+  }
 `;
 
 const LogoContainer = styled.div`
@@ -74,9 +115,9 @@ const LogoContainer = styled.div`
   @media only screen and (max-width: 768px) {
     display: block;
     position: absolute;
-    top: -50px;
-    right: calc(50% - 48px);
-    width: 90px;
-    height: 30px;
+    top: 5px;
+    right: calc(50% - 30px);
+    width: 60px;
+    height: 20px;
   }
 `;

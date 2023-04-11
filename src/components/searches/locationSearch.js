@@ -20,6 +20,8 @@ export default function Places({
   searchParams,
   setAddress,
   route,
+  setFormInfo,
+  formInfo,
 }) {
   const { isLoaded } = useLoadScript({
     googleMapsApiKey: process.env.NEXT_PUBLIC_MAPS_KEY,
@@ -33,10 +35,19 @@ export default function Places({
       searchParams={searchParams}
       setAddress={setAddress}
       route={route ? route : undefined}
+      setFormInfo={setFormInfo}
+      formInfo={formInfo}
     />
   );
 }
-function PlacesAutocomplete({ setLocation, searchParams, setAddress, route }) {
+function PlacesAutocomplete({
+  setLocation,
+  searchParams,
+  setAddress,
+  route,
+  setFormInfo,
+  formInfo,
+}) {
   const {
     ready,
     value,
@@ -56,8 +67,14 @@ function PlacesAutocomplete({ setLocation, searchParams, setAddress, route }) {
     clearSuggestions();
     const result = await getGeocode({ address });
     const { lat, lng } = getLatLng(result[0]);
-    setLocation({ lat, lng });
-    setAddress(address);
+
+    if (route === "auth") {
+      formInfo.address = address;
+      setFormInfo(formInfo);
+    } else {
+      setLocation({ lat, lng });
+      setAddress(address);
+    }
   };
 
   return (
@@ -68,6 +85,7 @@ function PlacesAutocomplete({ setLocation, searchParams, setAddress, route }) {
         disabled={!ready}
         required={true}
         route={route}
+        placeholder="Where are you?"
       />
       <ComboboxPopover style={{ zIndex: 3000 }}>
         <ComboboxList>
@@ -93,15 +111,34 @@ const Input = styled(ComboboxInput)`
           height: 3vh;
 
           @media only screen and (max-width: 768px) {
-            width: 180px !important;
-            height: 20px !important;
+            width: 260px !important;
+            height: 30px !important;
           }
+        `
+      : props.route === "results"
+      ? css`
+          height: 4vh;
+          width: 11vw;
+          background-color: #fff;
+          color: #000;
+          border: 0.5px solid #00000060;
         `
       : css`
           height: 4vh;
           width: 11vw;
+          background-color: transparent;
+          color: #fff;
+          border: 0.5px solid #ffffff60;
+          ::placeholder {
+            color: #ffffff60;
+          }
         `}
   @media only screen and (max-width: 768px) {
     width: 150px;
+    background-color: #ffffff90;
+    color: #000;
+    ::placeholder {
+      color: #00000090;
+    }
   }
 `;

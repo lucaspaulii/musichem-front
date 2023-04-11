@@ -12,7 +12,7 @@ export const Form = styled.form`
 
 export const AuthContainer = styled.div`
   width: 80%;
-  height: 80%;
+  height: 95%;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -23,7 +23,7 @@ export const AuthContainer = styled.div`
   h1 {
     font-weight: 800;
     font-size: 3vh;
-    margin-bottom: 5vh;
+    margin-bottom: 3vh;
   }
 `;
 
