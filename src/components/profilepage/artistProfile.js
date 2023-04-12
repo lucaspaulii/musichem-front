@@ -17,7 +17,11 @@ export default function ArtistProfile({ id }) {
   const artist = useArtistById(id);
   const { userData } = useContext(UserContext);
 
-  const disabledDates = [new Date("2023-04-11"), new Date("2023-04-12")]; //change to booked dates when there are bookings
+  const disabledDates = [
+    new Date("2023-04-11T03:00:00.000Z"),
+    new Date("2023-04-12T03:00:00.000Z"),
+  ]; //change to booked dates when there are bookings
+  const now = new Date();
 
   useEffect(() => {
     if (!artist.artistLoading) {
@@ -44,6 +48,7 @@ export default function ArtistProfile({ id }) {
         artistId: id,
         date: selectedDate.toISOString(),
       };
+      console.log(bookingInfo);
     }
   }
 
@@ -57,7 +62,6 @@ export default function ArtistProfile({ id }) {
               <h1>{artistInfo.artistName}</h1>
               <h2>{artistInfo.ratings.length === 0 ? "5.0★" : "5.0★"}</h2>
             </div>
-
             <div>
               <h2>{artistInfo.genre}</h2>
               <h2>/</h2>
@@ -105,14 +109,19 @@ export default function ArtistProfile({ id }) {
               <h2>AVAILABLE DATES</h2>
               <Calendar
                 onClickDay={(value) => setSelectedDate(value)}
-                tileDisabled={({ date, view }) =>
-                  view === "month" &&
+                tileDisabled={({ date }) =>
                   disabledDates.some(
                     (disabledDate) =>
                       date.getFullYear() === disabledDate.getFullYear() &&
                       date.getMonth() === disabledDate.getMonth() &&
                       date.getDate() === disabledDate.getDate()
-                  )
+                  ) ||
+                  (date.getFullYear() <= now.getFullYear() &&
+                    date.getMonth() <= now.getMonth() &&
+                    date.getDate() < now.getDate()) ||
+                  (date.getFullYear() <= now.getFullYear() &&
+                    date.getMonth() < now.getMonth()) ||
+                  date.getFullYear() < now.getFullYear()
                 }
               />
               <BookButton onClick={handleBooking}>BOOK THIS ARTIST!</BookButton>

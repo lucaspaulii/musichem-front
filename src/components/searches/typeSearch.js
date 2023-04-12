@@ -9,7 +9,14 @@ import styled, { css } from "styled-components";
 import "@reach/combobox/styles.css";
 import { useEffect, useState } from "react";
 
-export default function TypeSearch({ setType, searchParams, route }) {
+export default function TypeSearch({
+  setType,
+  searchParams,
+  route,
+  setFormInfo,
+  formInfo,
+  field,
+}) {
   const [value, setValue] = useState("");
   const [isFilled, setIsFilled] = useState(false);
 
@@ -25,7 +32,13 @@ export default function TypeSearch({ setType, searchParams, route }) {
   const handleSelect = (type) => {
     setValue(type);
     setIsFilled(true);
-    setType(type);
+    if (route === "artist") {
+      const newInfo = { ...formInfo, [field]: type };
+      console.log(newInfo);
+      setFormInfo(newInfo);
+    } else {
+      setType(type);
+    }
   };
 
   return (
@@ -62,8 +75,8 @@ const Input = styled(ComboboxInput)`
   color: #fff;
   border: 0.5px solid #ffffff60;
   ::placeholder {
-            color: #ffffff60;
-          }
+    color: #ffffff60;
+  }
 
   ${(props) =>
     props.route === "results" &&
@@ -74,11 +87,11 @@ const Input = styled(ComboboxInput)`
     `}
 
   @media only screen and (max-width: 768px) {
-    width: 150px; 
+    width: 150px;
     background-color: #ffffff90;
     color: #000;
     ::placeholder {
       color: #00000090;
     }
-}
+  }
 `;

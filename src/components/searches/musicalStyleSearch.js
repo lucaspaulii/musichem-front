@@ -10,11 +10,19 @@ import "@reach/combobox/styles.css";
 import { useEffect, useState } from "react";
 import musicalStyles from "@/sources/musicStyles";
 
-export default function MusicalStyleSearch({ setStyle, searchParams, route }) {
+export default function MusicalStyleSearch({
+  setStyle,
+  searchParams,
+  route,
+  setFormInfo,
+  formInfo,
+  field,
+}) {
   const [value, setValue] = useState("");
   const [isFilled, setIsFilled] = useState(false);
 
   useEffect(() => {
+    console.log(route);
     if (searchParams) {
       setValue(searchParams);
       setIsFilled(true);
@@ -24,7 +32,12 @@ export default function MusicalStyleSearch({ setStyle, searchParams, route }) {
   const handleSelect = (style) => {
     setValue(style);
     setIsFilled(true);
-    setStyle(style);
+    if (route === "artist") {
+      const newInfo = { ...formInfo, [field]: style };
+      setFormInfo(newInfo);
+    } else {
+      setStyle(style);
+    }
   };
 
   const handleFilter = (search) => {
@@ -74,8 +87,8 @@ const Input = styled(ComboboxInput)`
   color: #fff;
   border: 0.5px solid #ffffff60;
   ::placeholder {
-            color: #ffffff60;
-          }
+    color: #ffffff60;
+  }
 
   ${(props) =>
     props.route === "results" &&

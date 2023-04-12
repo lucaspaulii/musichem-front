@@ -113,6 +113,7 @@ export default function SingUp() {
           setFormInfo={setFormInfo}
           formInfo={formInfo}
           field="address"
+          route="auth"
         />
         <Input
           text={"BUSINESS NAME"}
@@ -127,6 +128,7 @@ export default function SingUp() {
           setFormInfo={setFormInfo}
           formInfo={formInfo}
           field="pictures"
+          optional={true}
         />
         <SubmitButton type="submit" disabled={loadingSignUp}>
           {loadingSignUp ? "loading" : "SIGN UP"}

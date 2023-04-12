@@ -21,10 +21,47 @@ async function getInfoById(id) {
   return artist;
 }
 
+async function createArtist({
+  userId,
+  artistName,
+  coverPicture,
+  description,
+  youtubeUrl,
+  spotifyUrl,
+  instagramUrl,
+  soundCloudUrl,
+  location,
+  allowedArea,
+  genre,
+  type,
+  price,
+  pictures,
+}) {
+  const URI = `${process.env.NEXT_PUBLIC_API_URL}artists`;
+  const response = await axios.post(URI, {
+    userId,
+    artistName,
+    coverPicture,
+    description,
+    youtubeUrl,
+    spotifyUrl,
+    instagramUrl,
+    soundCloudUrl,
+    location,
+    allowedArea,
+    genre,
+    type,
+    price,
+    pictures,
+  });
+  return response.data;
+}
+
 const artistService = {
   getNearArtists,
   getSearchedArtists,
   getInfoById,
+  createArtist
 };
 
 export default artistService;

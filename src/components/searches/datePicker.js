@@ -25,6 +25,7 @@ export default function DateInput({ setDate, searchParams, route }) {
       }}
       route={route}
       placeholderText={placeholder}
+      minDate={new Date()}
     />
   );
 }

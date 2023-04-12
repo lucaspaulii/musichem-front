@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import background from "../../../public/images/mainpagebg.jpeg";
 import { BsPersonCircle } from "react-icons/bs";
 import MainSearch from "./mainSearch";
 import NearYou from "./nearYou";
@@ -8,11 +7,13 @@ import ProfileModal from "./ProfileModal";
 import Router from "next/router";
 import Image from "next/image";
 import UserContext from "@/context/UserContext";
+import ArtistContext from "@/context/ArtistContext";
 
 export default function Cover() {
   const [modal, setModal] = useState(false);
   const [location, setLocation] = useState(undefined);
   const { userData } = useContext(UserContext);
+  const { artistData } = useContext(ArtistContext);
 
   useEffect(() => {
     if ("geolocation" in navigator) {
@@ -33,6 +34,8 @@ export default function Cover() {
   function handleAuthClick(e) {
     if (!userData.token) {
       Router.push("/auth/sign/in")
+    } else if (!artistData.id) {
+      Router.push("/artist/create")
     } else {
       Router.push("/construction")
     }

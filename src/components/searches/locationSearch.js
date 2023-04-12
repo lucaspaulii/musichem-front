@@ -71,7 +71,10 @@ function PlacesAutocomplete({
     if (route === "auth") {
       formInfo.address = address;
       setFormInfo(formInfo);
-    } else {
+    } else if (route === "artist") {
+      const coordinates = [lng, lat];
+      formInfo.location.coordinates = coordinates
+    }else {
       setLocation({ lat, lng });
       setAddress(address);
     }

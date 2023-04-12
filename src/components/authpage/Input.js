@@ -1,49 +1,79 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import Places from "../searches/locationSearch";
 import Image from "next/image";
 import { useEffect, useState } from "react";
+import MusicalStyleSearch from "../searches/musicalStyleSearch";
+import TypeSearch from "../searches/typeSearch";
 
-export default function Input({ text, type, setFormInfo, formInfo, field }) {
+export default function Input({
+  text,
+  type,
+  setFormInfo,
+  formInfo,
+  field,
+  route,
+  placehold,
+  optional
+}) {
   const [placeHolder, setPlaceHolder] = useState(undefined);
 
   useEffect(() => {
-    text == "DESCRIPTION" &&
-      setPlaceHolder("How you want the artists to know you?");
-    text == "EMAIL" && setPlaceHolder("johndoe@johndoe.com");
-    text == "NAME" && setPlaceHolder("Your personal name here!");
-    text == "PASSWORD" && setPlaceHolder("Keep it safe!");
-    text == "CONFIRM PASSWORD" &&
-      setPlaceHolder("Type you password to confirm it!");
-    text == "PICTURE" &&
-      setPlaceHolder(
-        "A beautiful image URL that shows you or your place! (optional)"
-      );
-    text == "BUSINESS NAME" &&
-      setPlaceHolder("How is your place called? (for business only)");
+    if (placehold) {
+      setPlaceHolder(placehold);
+    } else {
+      text == "DESCRIPTION" &&
+        setPlaceHolder("How you want the artists to know you?");
+      text == "EMAIL" && setPlaceHolder("johndoe@johndoe.com");
+      text == "NAME" && setPlaceHolder("Your personal name here!");
+      text == "PASSWORD" && setPlaceHolder("Keep it safe!");
+      text == "CONFIRM PASSWORD" &&
+        setPlaceHolder("Type you password to confirm it!");
+      text == "PICTURE" &&
+        setPlaceHolder(
+          "A beautiful image URL that shows you or your place! (optional)"
+        );
+      text == "BUSINESS NAME" &&
+        setPlaceHolder("How is your place called? (for business only)");
+    }
   }, []);
 
   function handleChange(e) {
     if (field == "pictures") {
-      formInfo.pictures = [];
+      formInfo.pictures = [...formInfo.pictures];
       formInfo.pictures[0] = e.target.value;
       setFormInfo(formInfo);
       return;
-    }
+    } else if (field == "pictures1") {
+      formInfo.pictures = [...formInfo.pictures];
+      formInfo.pictures[1] = e.target.value;
+      setFormInfo(formInfo);
+      return;
+    } else if (field == "pictures2") {
+      formInfo.pictures = [...formInfo.pictures];
+      formInfo.pictures[2] = e.target.value;
+      setFormInfo(formInfo);
+      return;
+    } 
     const newInfo = { ...formInfo, [field]: e.target.value };
     setFormInfo(newInfo);
   }
 
   return (
-    <InputContainer>
+    <InputContainer route={route}>
       <p>{text}</p>
       {type === "location" ? (
-        <Places route="auth" setFormInfo={setFormInfo} formInfo={formInfo} />
+        <Places route={route} setFormInfo={setFormInfo} formInfo={formInfo} field={field}/>
+      ) : type === "genre" ? (
+        <MusicalStyleSearch route={route} setFormInfo={setFormInfo} formInfo={formInfo} field={field}/>
+      ) : type === "type" ? (
+        <TypeSearch route={route} setFormInfo={setFormInfo} formInfo={formInfo} field={field}/>
       ) : (
         <InputStyled
           type={type}
-          required
+          required={optional ? false : true}
           placeholder={placeHolder}
           onChange={handleChange}
+          route={route}
         />
       )}
       <LogoContainer>
@@ -71,6 +101,16 @@ const InputContainer = styled.div`
     width: 100%;
     margin-bottom: 0.3vh;
   }
+  ${(props) =>
+    props.route === "artist" &&
+    css`
+      width: 90%;
+      p {
+        font-weight: 500 !important;
+        text-shadow: 0px 0px 4px #fff;
+        color: #000;
+      }
+    `}
 
   input {
     width: 100%;
@@ -97,6 +137,7 @@ const InputContainer = styled.div`
 `;
 
 const InputStyled = styled.input`
+box-sizing: border-box;
   width: 100%;
   height: 4vh;
   background-color: rgba(266, 266, 266, 0.9);
