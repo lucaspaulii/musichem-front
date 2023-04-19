@@ -19,7 +19,7 @@ export default function Profile() {
     <>
       {info && (
         <ResultsContainer>
-          <Header />
+          <Header route="profile"/>
           <ProfileSection profileInfo={info} />
         </ResultsContainer>
       )}
@@ -35,5 +35,9 @@ const ResultsContainer = styled.div`
 
   @media only screen and (max-width: 768px) {
     overflow-y: scroll;
+    ::-webkit-scrollbar {
+      display: none;
+    }
+    width: 100vw;
   }
 `;

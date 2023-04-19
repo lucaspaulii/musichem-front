@@ -6,7 +6,7 @@ export async function signIn({ email, password }) {
   return response.data;
 }
 
-export async function signOut({ token }) {
+export async function signOutService({ token }) {
   const URI = `${process.env.NEXT_PUBLIC_API_URL}auth/sign-out`;
   const response = await axios.post(URI, {
     headers: {

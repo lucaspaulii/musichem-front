@@ -51,6 +51,12 @@ const ResultsContainer = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+
+  @media only screen and (max-width: 768px) {
+    ::-webkit-scrollbar {
+      display: none;
+    }
+  }
 `;
 
 const ResultsArtists = styled.div`
@@ -75,6 +81,9 @@ const ResultsArtists = styled.div`
       width: 90%;
       margin-bottom: 8px;
     }
+    ::-webkit-scrollbar {
+      display: none;
+    }
   }
 `;
 
@@ -92,5 +101,8 @@ const ArtistsContainer = styled.div`
     width: 100%;
     height: 250px;
     justify-content: space-around;
+    ::-webkit-scrollbar {
+      display: none;
+    }
   }
 `;

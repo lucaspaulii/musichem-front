@@ -8,13 +8,13 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 export default function LogOut() {
-  const { setUserData } = useContext(UserContext);
+  const { setUserData, userData } = useContext(UserContext);
   const { setArtistData } = useContext(ArtistContext);
   const { signOut } = useSignOut();
 
   async function handleClick() {
     try {
-      await signOut();
+      await signOut(userData.token);
     } catch (error) {
       console.log(error);
     }

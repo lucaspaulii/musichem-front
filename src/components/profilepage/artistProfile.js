@@ -9,6 +9,7 @@ import "react-toastify/dist/ReactToastify.css";
 import CarrouselImages from "../artistpage/Carousel";
 import CalendarContainer from "../artistpage/Calendar";
 import BookingModal from "../artistpage/BookingModal";
+import Router from "next/router";
 
 export default function ArtistProfile({ id }) {
   const [artistInfo, setArtistInfo] = useState();
@@ -115,6 +116,13 @@ const ArtistContainer = styled.div`
   align-items: center;
   overflow-y: scroll;
   color: #fff;
+
+  @media only screen and (max-width: 768px) {
+    overflow-x: hidden;
+    ::-webkit-scrollbar {
+      display: none;
+    }
+  }
 `;
 
 const ArtistHeader = styled.div`
@@ -139,12 +147,32 @@ const ArtistHeader = styled.div`
     align-items: center;
     margin-bottom: 10px;
   }
+
+  @media only screen and (max-width: 768px) {
+    width: 100%;
+    margin-top: 5px;
+    h1 {
+      font-size: 25px;
+    }
+    h2 {
+      font-size: 14px;
+    }
+    ::-webkit-scrollbar {
+      display: none;
+    }
+  }
 `;
 
 const ContentContainer = styled.div`
   width: 90%;
   display: flex;
   justify-content: center;
+
+  @media only screen and (max-width: 768px) {
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+  }
 `;
 
 const DescriptionContainer = styled.div`
@@ -174,6 +202,18 @@ const DescriptionContainer = styled.div`
   }
   div {
     width: 100%;
+  }
+
+  @media only screen and (max-width: 768px) {
+    width: 100%;
+    margin-bottom: 40px;
+    padding: 10px 50px;
+    h2 {
+      font-size: 16px;
+    }
+    p {
+      font-size: 16px;
+    }
   }
 `;
 

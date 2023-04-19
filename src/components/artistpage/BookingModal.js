@@ -120,6 +120,12 @@ const BookingCard = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+
+  @media only screen and (max-width: 768px) {
+    width: 300px;
+    height: 450px;
+    margin-bottom: 35px;
+  }
 `;
 
 const BookingCardHeader = styled.div`
@@ -135,6 +141,10 @@ const BookingCardHeader = styled.div`
   color: #fff;
   font-size: 30px;
   font-weight: 500;
+
+  @media only screen and (max-width: 768px) {
+    font-size: 20px;
+  }
 `;
 
 const BookingCardContent = styled.div`
@@ -151,6 +161,10 @@ const InfoContainer = styled.div`
   border-bottom: 0.5px dashed gray;
   p {
     font-weight: 600;
+  }
+
+  @media only screen and (max-width: 768px) {
+    font-size: 14px;
   }
 `;
 

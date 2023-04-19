@@ -246,6 +246,10 @@ const CreateContainer = styled.div`
   justify-content: center;
   align-items: center;
   font-family: "Montserrat", sans-serif;
+  @media only screen and (max-width: 768px) {
+    width: 100vw;
+    height: 100vh;
+  }
 `;
 
 const AuxDiv = styled.div`
@@ -263,5 +267,9 @@ const AuxDiv = styled.div`
         color: #777;
       }
     }
+  }
+  @media only screen and (max-width: 768px) {
+    flex-direction: column;
+    width: 70%;
   }
 `;

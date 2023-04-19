@@ -8,6 +8,10 @@ export const Form = styled.form`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+
+  @media only screen and (max-width: 768px) {
+    margin-top: 550px;
+  }
 `;
 
 export const AuthContainer = styled.div`
@@ -23,7 +27,23 @@ export const AuthContainer = styled.div`
   ${(props) =>
     props.route === "artist" &&
     css`
-      background-color: rgba(188, 198, 218, 0.80) !important;
+      background-color: rgba(188, 198, 218, 0.8) !important;
+
+      @media only screen and (max-width: 768px) {
+        overflow-y: scroll;
+        width: 100vw;
+        height: 100vh;
+        position: fixed;
+        top: 0;
+        left: 0;
+
+        h1 {
+          font-size: 20px;
+        }
+        img {
+          display: none;
+        }
+      }
     `}
 
   h1 {
@@ -57,6 +77,10 @@ export const SubmitButton = styled.button`
       width: 220px;
       height: 60px;
       font-size: 15px !important;
+
+      @media only screen and (max-width: 768px) {
+        margin-bottom: 30px;
+      }
     `}
 `;
 

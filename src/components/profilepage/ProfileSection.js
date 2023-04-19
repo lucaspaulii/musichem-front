@@ -26,4 +26,10 @@ const ProfileContainer = styled.div`
   background-color: black;
   position: relative;
   overflow-y: scroll;
+
+  @media only screen and (max-width: 768px) {
+    ::-webkit-scrollbar {
+      display: none;
+    }
+  }
 `;

@@ -30,10 +30,21 @@ export default function CarrouselImages({coverPicture, pictures}) {
 const CarouselImage = styled.div`
   height: 400px;
   width: 200px;
+
+  @media only screen and (max-width: 768px) {
+    width: 100px;
+    height: 200px;
+  }
 `;
 
 const CarouselContainer = styled.div`
   width: 500px;
   height: 500px;
   position: relative;
+
+  @media only screen and (max-width: 768px) {
+    width: 200px;
+    height: 200px;
+    margin-bottom: 35px;
+  }
 `;

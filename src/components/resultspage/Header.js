@@ -3,10 +3,11 @@ import MainSearch from "../mainpage/mainSearch";
 import Router from "next/router";
 import BackOne from "../authpage/backOne";
 import Image from "next/image";
+import css from "styled-jsx/css";
 
-export default function Header({ searchParams }) {
+export default function Header({ searchParams, route }) {
   return (
-    <HeaderContainer>
+    <HeaderContainer route={route}>
       <BackOne />
       <ImageContainer>
         <Image
@@ -18,7 +19,9 @@ export default function Header({ searchParams }) {
           alt="logo"
         />
       </ImageContainer>
-      <MainSearch route={"results"} searchParams={searchParams} />
+      {route !== "profile" && (
+        <MainSearch route={"results"} searchParams={searchParams} />
+      )}
     </HeaderContainer>
   );
 }
@@ -40,6 +43,17 @@ const HeaderContainer = styled.div`
     height: 270px;
     width: 100vw;
   }
+
+  ${(props) =>
+    props.route === "profile" &&
+    css`
+      @media only screen and (max-width: 768px) {
+        position: relative;
+        height: 60px;
+        width: 100vw;
+        background-color: gray;
+      }
+    `}
 `;
 
 const ImageContainer = styled.div`
