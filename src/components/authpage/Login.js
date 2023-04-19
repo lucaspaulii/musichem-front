@@ -7,6 +7,9 @@ import useSignIn from "@/hooks/useSignIn";
 import UserContext from "@/context/UserContext";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import useArtistByToken from "@/hooks/useArtistByToken";
+import ArtistContext from "@/context/ArtistContext";
+import artistService from "@/services/artistsServices";
 
 export default function Login() {
   const [formInfo, setFormInfo] = useState({
@@ -15,11 +18,15 @@ export default function Login() {
   });
   const { loadingSignIn, signIn } = useSignIn();
   const { setUserData } = useContext(UserContext);
+  const { setArtistData } = useContext(ArtistContext);
 
   async function handleSubmit(e) {
     e.preventDefault();
     try {
       const userData = await signIn(formInfo);
+      if (userData.user.hasArtistPage) {
+        await handleArtist(userData.token);
+      }
       setUserData(userData);
       toast.success("Login successfully!", {
         position: "top-right",
@@ -45,6 +52,14 @@ export default function Login() {
         progress: undefined,
         theme: "dark",
       });
+    }
+  }
+
+  async function handleArtist(token) {
+    try {
+      const artist = await artistService.getInfoByUserId(token);
+      setArtistData(artist.data);
+    } catch (error) {
     }
   }
 

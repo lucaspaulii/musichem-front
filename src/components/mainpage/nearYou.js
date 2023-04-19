@@ -31,9 +31,6 @@ export default function NearYou({ location }) {
           ))
         )}
       </ArtistsContainer>
-      <ClickableH1 onClick={(e) => Router.push("/construction")}>
-        See More...
-      </ClickableH1>
     </NearYouContainer>
   );
 }

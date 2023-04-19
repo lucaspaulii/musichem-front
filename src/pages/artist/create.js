@@ -30,19 +30,17 @@ export default function CreateArtist() {
     price: undefined,
     pictures: [],
   });
-  const { userData } = useContext(UserContext);
+  const { userData, setUserData } = useContext(UserContext);
   const { setArtistData } = useContext(ArtistContext);
   const { createArtistLoading, createArtist } = useCreateArtist();
 
   async function handleSubmit(e) {
     e.preventDefault();
     try {
-      console.log(formInfo);
-      console.log(userData);
       const submitForm = { ...formInfo, userId: userData.user.id };
-      console.log(submitForm);
       const artistData = await createArtist(submitForm);
       setArtistData(artistData);
+      setUserData({...userData, user: {...user, hasArtistPage: true}}) //nao testado ainda
       toast.success("Artist page created successfuly!", {
         position: "top-right",
         autoClose: 5000,
@@ -57,7 +55,6 @@ export default function CreateArtist() {
         Router.back();
       }, 3000);
     } catch (error) {
-      console.log(error);
       toast.error("something went wrong", {
         position: "top-right",
         autoClose: 5000,
@@ -149,7 +146,7 @@ export default function CreateArtist() {
               setFormInfo={setFormInfo}
               formInfo={formInfo}
               route="artist"
-              placehold="Your YouTube channel URL (optional)"
+              placehold="Your YouTube channel URL with ID!(optional)"
               optional={true}
             />
             <Input
@@ -159,7 +156,7 @@ export default function CreateArtist() {
               setFormInfo={setFormInfo}
               formInfo={formInfo}
               route="artist"
-              placehold="Your Spotify artist page URL (optional)"
+              placehold="Your Spotify artist page URL with ID! (optional)"
               optional={true}
             />
             <Input
@@ -178,7 +175,7 @@ export default function CreateArtist() {
               setFormInfo={setFormInfo}
               formInfo={formInfo}
               route="artist"
-              placehold="Your SoundCloud profile URL (optional)"
+              placehold="Your SoundCloud profile URL with ID! (optional)"
               optional={true}
             />
           </AuxDiv>

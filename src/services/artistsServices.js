@@ -21,6 +21,16 @@ async function getInfoById(id) {
   return artist;
 }
 
+async function getInfoByUserId(token) {
+  const URI = `${process.env.NEXT_PUBLIC_API_URL}artists/user`;
+  const artist = await axios.get(URI, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+  return artist;
+}
+
 async function createArtist({
   userId,
   artistName,
@@ -61,7 +71,8 @@ const artistService = {
   getNearArtists,
   getSearchedArtists,
   getInfoById,
-  createArtist
+  getInfoByUserId,
+  createArtist,
 };
 
 export default artistService;

@@ -50,7 +50,7 @@ export default function SingUp() {
           theme: "dark",
         });
         setTimeout(() => {
-          Router.back();
+          Router.push('/auth/sign/in');
         }, 3000);
       } catch (error) {
         toast.error("something went wrong", {

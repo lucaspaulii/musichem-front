@@ -1,27 +1,22 @@
 import useArtistById from "@/hooks/useArtistById";
-import Image from "next/image";
 import { useContext, useEffect, useState } from "react";
 import styled from "styled-components";
-import { Carousel } from "react-responsive-carousel";
-import "react-responsive-carousel/lib/styles/carousel.min.css";
 import MapPlaces from "./map";
-import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
 import UserContext from "@/context/UserContext";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import CarrouselImages from "../artistpage/Carousel";
+import CalendarContainer from "../artistpage/Calendar";
+import BookingModal from "../artistpage/BookingModal";
 
 export default function ArtistProfile({ id }) {
   const [artistInfo, setArtistInfo] = useState();
   const [selectedDate, setSelectedDate] = useState();
+  const [bookingInfo, setBookingInfo] = useState();
+  const [modal, setModal] = useState(false);
   const artist = useArtistById(id);
   const { userData } = useContext(UserContext);
-
-  const disabledDates = [
-    new Date("2023-04-11T03:00:00.000Z"),
-    new Date("2023-04-12T03:00:00.000Z"),
-  ]; //change to booked dates when there are bookings
-  const now = new Date();
 
   useEffect(() => {
     if (!artist.artistLoading) {
@@ -44,11 +39,11 @@ export default function ArtistProfile({ id }) {
       });
     } else {
       const bookingInfo = {
-        userId: userData.user.id,
         artistId: id,
         date: selectedDate.toISOString(),
       };
-      console.log(bookingInfo);
+      setBookingInfo(bookingInfo);
+      setModal(true);
     }
   }
 
@@ -69,30 +64,10 @@ export default function ArtistProfile({ id }) {
             </div>
           </ArtistHeader>
           <ContentContainer>
-            <CarouselContainer>
-              <Carousel showArrows={true} showThumbs={false}>
-                <CarouselImage>
-                  <Image
-                    src={artistInfo.coverPicture}
-                    fill
-                    alt="artist"
-                    style={{ objectFit: "cover" }}
-                  />
-                </CarouselImage>
-                {artistInfo.pictures.map((pic) => {
-                  return (
-                    <CarouselImage>
-                      <Image
-                        src={pic}
-                        fill
-                        alt="alt"
-                        style={{ objectFit: "cover" }}
-                      />
-                    </CarouselImage>
-                  );
-                })}
-              </Carousel>
-            </CarouselContainer>
+            <CarrouselImages
+              coverPicture={artistInfo.coverPicture}
+              pictures={artistInfo.pictures}
+            />
             <DescriptionContainer>
               <h2>DESCRIPTION:</h2>
               <p>{artistInfo.description}</p>
@@ -107,28 +82,24 @@ export default function ArtistProfile({ id }) {
           <ContentContainer>
             <DescriptionContainer>
               <h2>AVAILABLE DATES</h2>
-              <Calendar
-                onClickDay={(value) => setSelectedDate(value)}
-                tileDisabled={({ date }) =>
-                  disabledDates.some(
-                    (disabledDate) =>
-                      date.getFullYear() === disabledDate.getFullYear() &&
-                      date.getMonth() === disabledDate.getMonth() &&
-                      date.getDate() === disabledDate.getDate()
-                  ) ||
-                  (date.getFullYear() <= now.getFullYear() &&
-                    date.getMonth() <= now.getMonth() &&
-                    date.getDate() < now.getDate()) ||
-                  (date.getFullYear() <= now.getFullYear() &&
-                    date.getMonth() < now.getMonth()) ||
-                  date.getFullYear() < now.getFullYear()
-                }
+              <CalendarContainer
+                setSelectedDate={setSelectedDate}
+                bookedDates={artistInfo.bookedDates}
               />
               <BookButton onClick={handleBooking}>BOOK THIS ARTIST!</BookButton>
             </DescriptionContainer>
             <DescriptionContainer></DescriptionContainer>
           </ContentContainer>
         </>
+      )}
+      {modal && (
+        <BookingModal
+          modal={modal}
+          setModal={setModal}
+          bookingInfo={bookingInfo}
+          setBookingInfo={setBookingInfo}
+          artistInfo={artistInfo}
+        />
       )}
     </ArtistContainer>
   );
@@ -204,17 +175,6 @@ const DescriptionContainer = styled.div`
   div {
     width: 100%;
   }
-`;
-
-const CarouselImage = styled.div`
-  height: 400px;
-  width: 200px;
-`;
-
-const CarouselContainer = styled.div`
-  width: 500px;
-  height: 500px;
-  position: relative;
 `;
 
 const BookButton = styled.button`

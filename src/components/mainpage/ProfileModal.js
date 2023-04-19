@@ -4,9 +4,12 @@ import UserContext from "@/context/UserContext";
 import { useContext } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import LogOut from "../authpage/logOut";
 
 export default function ProfileModal({ modal, setModal }) {
   const { userData } = useContext(UserContext);
+
+  console.log(userData);
 
   function handleClick(route) {
     if (userData.token) {
@@ -25,18 +28,29 @@ export default function ProfileModal({ modal, setModal }) {
     }
   }
 
+  function handleAuthClick(e) {
+    if (!userData.token) {
+      Router.push("/auth/sign/in");
+    } else if (!artistData.id) {
+      Router.push("/artist/create");
+    } else {
+      Router.push("/construction");
+    }
+  }
+
   return (
     <Modal openModal={modal}>
       <ToastContainer />
-      <h1>Hello, Visitor</h1>
+      <h1>Hello, {userData?.user?.name ? userData.user.name : "Visitor"}</h1>
       <FirstSection>
         <a onClick={(e) => handleClick("up")}>New here? Sign up</a>
         <a onClick={(e) => handleClick("in")}>Log in</a>
       </FirstSection>
       <SecondSection>
-        <a href="#">Musichem yourself!</a>
+        <a onClick={handleAuthClick}>Musichem yourself!</a>
         <a href="#">Account info</a>
       </SecondSection>
+      <LogOut />
     </Modal>
   );
 }
