@@ -34,8 +34,8 @@ export default function ResultsSection({ searchParams }) {
         </h1>
         <ArtistsContainer>
           {nearArtists?.data.length > 0 &&
-            nearArtists.data.map((artist) => (
-              <ArtistCard artist={artist} route={"results"} />
+            nearArtists.data.map((artist, i) => (
+              <ArtistCard artist={artist} route={"results"} key={i}/>
             ))}
         </ArtistsContainer>
       </ResultsArtists>

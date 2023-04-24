@@ -32,7 +32,7 @@ export default function CreateArtist() {
   });
   const { userData, setUserData } = useContext(UserContext);
   const { setArtistData } = useContext(ArtistContext);
-  const { createArtistLoading, createArtist } = useCreateArtist();
+  const { createArtist } = useCreateArtist();
 
   async function handleSubmit(e) {
     e.preventDefault();

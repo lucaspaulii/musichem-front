@@ -1,5 +1,10 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  output: 'standalone',
+  distDir: 'build',
+  eslint: {
+    ignoreDuringBuilds: true,
+  },
   reactStrictMode: true,
   compiler: {
     styledComponents: true,

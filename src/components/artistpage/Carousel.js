@@ -15,9 +15,9 @@ export default function CarrouselImages({coverPicture, pictures}) {
             style={{ objectFit: "cover" }}
           />
         </CarouselImage>
-        {pictures.map((pic) => {
+        {pictures.map((pic, i) => {
           return (
-            <CarouselImage>
+            <CarouselImage key={i}>
               <Image src={pic} fill alt="alt" style={{ objectFit: "cover" }} />
             </CarouselImage>
           );
