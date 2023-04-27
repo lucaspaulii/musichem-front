@@ -1,8 +1,10 @@
 services:
-  next:
-    container_name: next
+  nextjs:
+    container_name: nextjs
     build: .
     image: fullstack/frontend
+    networks:
+      - fullstack-network
     volumes:
       - next-volume:/var/www/html
 
@@ -17,7 +19,7 @@ services:
     volumes:
       - next-volume:/var/www/html
     depends_on:
-      - next
+      - nextjs
 
 networks:
   fullstack-network:
