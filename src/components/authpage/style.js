@@ -10,7 +10,7 @@ export const Form = styled.form`
   align-items: center;
 
   @media only screen and (max-width: 768px) {
-    margin-top: 550px;
+    margin-top: 150px;
   }
 `;
 

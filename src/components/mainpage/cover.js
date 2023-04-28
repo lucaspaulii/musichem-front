@@ -17,10 +17,16 @@ export default function Cover() {
 
   useEffect(() => {
     if ("geolocation" in navigator) {
+      let coordinates = undefined;
       navigator.geolocation.getCurrentPosition(({ coords }) => {
-        const { latitude, longitude } = coords;
-        setLocation({ latitude, longitude });
+        coordinates = coords;
       });
+      if (coordinates) {
+        const { latitude, longitude } = coordinates;
+        setLocation({ latitude, longitude });
+      } else {
+        setLocation({ latitude: -27.5935, longitude: -48.55854 });
+      }
     } else {
       setLocation({ latitude: -27.5935, longitude: -48.55854 });
     }
