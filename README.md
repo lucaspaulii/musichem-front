@@ -1,6 +1,9 @@
 # Musichems
 
 Musichems, created by Lucas Costa Pauli, is a personal project aimed at serving as an intermediary between artists, bands, DJs, and contractors. The main purpose of Musichems is to facilitate the process of connecting artists with potential contractors or clients who are interested in hiring them for various music-related services.
+<br/>
+<br/>
+Live at: https://musichems.vercel.app/
 
 ## Installation
 
@@ -19,7 +22,7 @@ to avoid any package conflict during the instalation
 ## Contributing
 
 If you want to contribute to this project feel free to contact me so we can discuss it further!
-e-mail: lucaspauli22@gmail.com
+<br/>e-mail: lucaspauli22@gmail.com
 
 ## License
 
