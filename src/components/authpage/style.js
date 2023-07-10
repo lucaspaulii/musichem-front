@@ -8,10 +8,7 @@ export const Form = styled.form`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-
-  @media only screen and (max-width: 768px) {
-    margin-top: 150px;
-  }
+  height: fit-content;
 `;
 
 export const AuthContainer = styled.div`
@@ -24,21 +21,24 @@ export const AuthContainer = styled.div`
   background-color: rgba(266, 266, 266, 0.3);
   position: relative;
 
+  @media only screen and (max-width: 768px) {
+    width: 90%;
+  }
+
   ${(props) =>
     props.route === "artist" &&
     css`
       background-color: rgba(188, 198, 218, 0.8) !important;
 
       @media only screen and (max-width: 768px) {
-        overflow-y: scroll;
         width: 100vw;
-        height: 100vh;
-        position: fixed;
-        top: 0;
-        left: 0;
+        height: fit-content;
+        margin-top: 700px;
+        padding-top: 100px;
 
         h1 {
           font-size: 20px;
+          width: 60%;
         }
         img {
           display: none;

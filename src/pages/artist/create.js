@@ -70,7 +70,7 @@ export default function CreateArtist() {
 
   return (
     <CreateContainer>
-      <Image
+      <Background
         src={"/images/createartist.jpg"}
         fill
         style={{ objectFit: "cover", zIndex: "-10" }}
@@ -249,8 +249,18 @@ const CreateContainer = styled.div`
   @media only screen and (max-width: 768px) {
     width: 100vw;
     height: 100vh;
+    overflow-y: scroll;
   }
 `;
+
+const Background = styled(Image)`
+  object-fit: cover;
+  z-index: -10; 
+
+  @media only screen and (max-width: 768px) {
+    display: none;
+  }
+`
 
 const AuxDiv = styled.div`
   box-sizing: border-box;

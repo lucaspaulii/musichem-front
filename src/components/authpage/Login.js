@@ -7,7 +7,6 @@ import useSignIn from "@/hooks/useSignIn";
 import UserContext from "@/context/UserContext";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import useArtistByToken from "@/hooks/useArtistByToken";
 import ArtistContext from "@/context/ArtistContext";
 import artistService from "@/services/artistsServices";
 
@@ -39,7 +38,7 @@ export default function Login() {
         theme: "dark",
       });
       setTimeout(() => {
-        Router.back();
+        Router.push("/");
       }, 3000);
     } catch (error) {
       toast.error("Something went wrong!", {

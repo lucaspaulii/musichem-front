@@ -133,8 +133,10 @@ const SearchContainer = styled.button`
             top: 100px;
           `
         : css`
-            right: 15%;
+            right: 10%;
             top: 21%;
+            background-color: #00000070;
+            border-radius: 5px;
           `}
   }
 `;
